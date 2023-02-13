@@ -7,6 +7,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import MyNotesApp from "./components/MyNotesApp";
 import { APP_NAME } from "./utils/MyConstants";
+import "./styles/style.css";
 
 document.title = APP_NAME;
 const root = createRoot(document.getElementById("root"));
