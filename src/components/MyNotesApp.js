@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import SearchAppBar from "./SearchAppBar";
+import { SearchNavBar } from "./SearchNavBar";
 
 export default class MyNotesApp extends Component {
   render() {
     return (
       <div>
-        <SearchAppBar />
+        <SearchNavBar />
       </div>
     );
   }
