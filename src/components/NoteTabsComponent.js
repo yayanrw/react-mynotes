@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Container, Tab, Tabs } from "react-bootstrap";
-import { ACTIVE_NOTES, ARCHIVED_NOTES } from "../utils/MyConstants";
+import { ACTIVE_NOTES, ADD_NOTE, ARCHIVED_NOTES } from "../utils/MyConstants";
 import NotesListComponent from "./NotesListComponent";
 import { getInitialData } from "../utils/MyData";
+import TabTitleComponent from "./TabTitleComponent";
 
 export class NoteTabsComponent extends Component {
   constructor(props) {
@@ -33,14 +34,29 @@ export class NoteTabsComponent extends Component {
           className="mb-3 mt-5"
           fill
         >
-          <Tab eventKey="active-notes" title={ACTIVE_NOTES}>
+          <Tab
+            eventKey="active-notes"
+            title={<TabTitleComponent title={ACTIVE_NOTES} count={10} />}
+          >
             <NotesListComponent
               notes={this.state.notes}
               onArchive={this.onArchiveHandler}
               onDelete={this.onDeleteHandler}
             />
           </Tab>
-          <Tab eventKey="archived-notes" title={ARCHIVED_NOTES}>
+          <Tab
+            eventKey="archived-notes"
+            title={
+              <TabTitleComponent
+                title={ARCHIVED_NOTES}
+                count={2}
+                badgeType="secondary"
+              />
+            }
+          >
+            <h2>Halo</h2>
+          </Tab>
+          <Tab eventKey="add-note" title={ADD_NOTE}>
             <h2>Halo</h2>
           </Tab>
         </Tabs>
