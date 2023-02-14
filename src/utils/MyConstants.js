@@ -4,6 +4,7 @@ const AWESOME_QUOTE =
 const SEARCH_PLACEHOLDER = "Search your awesome notes...";
 const ACTIVE_NOTES = "Active Notes";
 const ARCHIVED_NOTES = "Archived Notes";
+const ADD_NOTE = "Add new note";
 
 export {
   APP_NAME,
@@ -11,4 +12,5 @@ export {
   SEARCH_PLACEHOLDER,
   ACTIVE_NOTES,
   ARCHIVED_NOTES,
+  ADD_NOTE,
 };
