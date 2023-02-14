@@ -20,3 +20,7 @@ export const DELETE_IT = "Delete";
 export const ARCHIVE_IT = "Archive";
 export const UNARCHIVE_IT = "Unarchive";
 export const TRY_AGAIN = "Try again";
+export const INSERT = "insert";
+export const DELETE = "delete";
+export const ARCHIVE = "archive";
+export const UNARCHIVE = "unarchive";
