@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import { NoteCardItem } from "./NoteCardItem";
+import NoteCardItemComponent from "./NoteCardItemComponent";
 
 const NotesListComponent = ({ notes, onArchive, onDelete }) => {
   return (
@@ -8,7 +8,7 @@ const NotesListComponent = ({ notes, onArchive, onDelete }) => {
       <Row>
         {notes.map((note) => {
           return (
-            <NoteCardItem
+            <NoteCardItemComponent
               key={note.id}
               id={note.id}
               onArchive={onArchive}
