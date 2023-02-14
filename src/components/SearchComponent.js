@@ -8,7 +8,7 @@ const SearchComponent = () => {
       <Form.Control
         type="search"
         placeholder={SEARCH_PLACEHOLDER}
-        className="me-2"
+        className="me-2 py-3 px-5"
         aria-label="Search"
       />
     </Form>
