@@ -4,6 +4,8 @@ import { ACTIVE_NOTES, ADD_NOTE, ARCHIVED_NOTES } from "../utils/MyConstants";
 import NotesListComponent from "./NotesListComponent";
 import { getInitialData } from "../utils/MyData";
 import TabTitleComponent from "./TabTitleComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 export class NoteTabsComponent extends Component {
   constructor(props) {
@@ -36,7 +38,13 @@ export class NoteTabsComponent extends Component {
         >
           <Tab
             eventKey="active-notes"
-            title={<TabTitleComponent title={ACTIVE_NOTES} count={10} />}
+            title={
+              <TabTitleComponent
+                title={ACTIVE_NOTES}
+                count={10}
+                badgeType="primary"
+              />
+            }
           >
             <NotesListComponent
               notes={this.state.notes}
@@ -56,7 +64,15 @@ export class NoteTabsComponent extends Component {
           >
             <h2>Halo</h2>
           </Tab>
-          <Tab eventKey="add-note" title={ADD_NOTE}>
+          <Tab
+            eventKey="add-note"
+            title={
+              <TabTitleComponent
+                title={ADD_NOTE}
+                count={<FontAwesomeIcon icon={solid("plus")} />}
+              />
+            }
+          >
             <h2>Halo</h2>
           </Tab>
         </Tabs>
