@@ -16,7 +16,7 @@ const NoteCardItemComponent = ({
   return (
     <Col lg="3" className="pb-4">
       <Card className="card-height">
-        <Card.Header as="h5" className="p-3">
+        <Card.Header as="h7" className="p-3">
           {title}
         </Card.Header>
         <Card.Body>

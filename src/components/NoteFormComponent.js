@@ -1,5 +1,9 @@
 import React from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import {
+  NOTE_DETAIL_PLACEHOLDER,
+  NOTE_TITLE_PLACEHOLDER,
+} from "../utils/MyConstants";
 
 const NoteFormComponent = () => {
   return (
@@ -13,14 +17,17 @@ const NoteFormComponent = () => {
             <Form>
               <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Type your note title" />
+                <Form.Control
+                  type="text"
+                  placeholder={NOTE_TITLE_PLACEHOLDER}
+                />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicBody">
                 <Form.Label>Detail</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={5}
-                  placeholder="Type your note detail"
+                  placeholder={NOTE_DETAIL_PLACEHOLDER}
                 />
               </Form.Group>
               <Button variant="primary" type="submit">

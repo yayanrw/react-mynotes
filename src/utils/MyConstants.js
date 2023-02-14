@@ -1,20 +1,11 @@
-const AUTHOR = "Yayan Rahmat Wijaya";
-const CLASS_NAME = "Membangun Aplikasi Catatan Menggunakan React";
-const APP_NAME = "MyNotes App";
-const AWESOME_QUOTE =
+export const AUTHOR = "Yayan Rahmat Wijaya";
+export const CLASS_NAME = "Membangun Aplikasi Catatan Menggunakan React";
+export const APP_NAME = "MyAwesomeNotes";
+export const AWESOME_QUOTE =
   "Creating a notes isn't just about capturing details, it's a space for reflection, clarity, and personal growth. It helps process thoughts, track progress, and cultivate gratitude, making it a powerful tool for self-discovery.";
-const SEARCH_PLACEHOLDER = "Search your awesome notes...";
-const ACTIVE_NOTES = "Active Notes";
-const ARCHIVED_NOTES = "Archived Notes";
-const ADD_NOTE = "Add new note";
-
-export {
-  AUTHOR,
-  CLASS_NAME,
-  APP_NAME,
-  AWESOME_QUOTE,
-  SEARCH_PLACEHOLDER,
-  ACTIVE_NOTES,
-  ARCHIVED_NOTES,
-  ADD_NOTE,
-};
+export const SEARCH_PLACEHOLDER = "Search your awesome notes...";
+export const ACTIVE_NOTES = "Active Notes";
+export const ARCHIVED_NOTES = "Archived Notes";
+export const ADD_NOTE = "Add new note";
+export const NOTE_TITLE_PLACEHOLDER = "Type your awesome note title";
+export const NOTE_DETAIL_PLACEHOLDER = "Type your note awesome detail";
