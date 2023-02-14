@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { showFormattedDate } from "../utils/MyData";
+import { showFormattedDate } from "../utils/MyCustoms";
 
 const NoteCardItemComponent = ({
   title,
