@@ -11,10 +11,11 @@ export const NOTE_TITLE_PLACEHOLDER = "Type your awesome note title";
 export const NOTE_DETAIL_PLACEHOLDER = "Type your note awesome detail";
 export const ARE_YOU_SURE = "Are you sure?";
 export const ERROR_WARN = "Error occured, please try again.";
-export const INSERT_DATA_WARN = "Do you want to save this note?";
-export const DELETE_DATA_WARN = "Do you want to delete this note?";
-export const ARCHIVE_DATA_WARN = "Do you want to archive this note?";
-export const UNARCHIVE_DATA_WARN = "Do you want to unarchive this note?";
+export const INSERT_DATA_WARN = "Do you want to save this awesome note?";
+export const DELETE_DATA_WARN = "Do you want to delete this awesome note?";
+export const ARCHIVE_DATA_WARN = "Do you want to archive this awesome note?";
+export const UNARCHIVE_DATA_WARN =
+  "Do you want to unarchive this awesome note?";
 export const INSERT_IT = "Save";
 export const DELETE_IT = "Delete";
 export const ARCHIVE_IT = "Archive";
