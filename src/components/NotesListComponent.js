@@ -6,6 +6,7 @@ const NotesListComponent = ({
   notes,
   showArchive = false,
   onArchive,
+  onUnarchive,
   onDelete,
 }) => {
   return (
@@ -18,6 +19,7 @@ const NotesListComponent = ({
               key={note.id}
               id={note.id}
               onArchive={onArchive}
+              onUnarchive={onUnarchive}
               onDelete={onDelete}
               {...note}
             />

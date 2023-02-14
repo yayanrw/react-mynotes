@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { Container, Tab, Tabs } from "react-bootstrap";
-import { ACTIVE_NOTES, ADD_NOTE, ARCHIVED_NOTES } from "../utils/MyConstants";
+import {
+  ACTIVE_NOTES,
+  ADD_NOTE,
+  ARCHIVE,
+  ARCHIVED_NOTES,
+  DELETE,
+  UNARCHIVE,
+} from "../utils/MyConstants";
 import NotesListComponent from "./NotesListComponent";
 import { getInitialData } from "../utils/MyData";
 import TabTitleComponent from "./TabTitleComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import NoteFormComponent from "./NoteFormComponent";
+import { confirmationDialog } from "../utils/MyCustoms";
 
 export class NoteTabsComponent extends Component {
   constructor(props) {
@@ -19,15 +27,29 @@ export class NoteTabsComponent extends Component {
     };
 
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
+    this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
   }
 
   onArchiveHandler() {
-    // TODO
+    confirmationDialog(ARCHIVE, (confirmed) => {
+      if (confirmed) {
+      }
+    });
+  }
+
+  onUnarchiveHandler() {
+    confirmationDialog(UNARCHIVE, (confirmed) => {
+      if (confirmed) {
+      }
+    });
   }
 
   onDeleteHandler() {
-    // TODO
+    confirmationDialog(DELETE, (confirmed) => {
+      if (confirmed) {
+      }
+    });
   }
 
   render() {
@@ -64,6 +86,7 @@ export class NoteTabsComponent extends Component {
               notes={this.state.notes}
               showArchive={false}
               onArchive={this.onArchiveHandler}
+              onUnarchive={this.onUnarchiveHandler}
               onDelete={this.onDeleteHandler}
             />
           </Tab>
@@ -81,6 +104,7 @@ export class NoteTabsComponent extends Component {
               notes={this.state.notes}
               showArchive={true}
               onArchive={this.onArchiveHandler}
+              onUnarchive={this.onUnarchiveHandler}
               onDelete={this.onDeleteHandler}
             />
           </Tab>
