@@ -37,6 +37,17 @@ export class NoteTabsComponent extends Component {
           fill
         >
           <Tab
+            eventKey="add-note"
+            title={
+              <TabTitleComponent
+                title={ADD_NOTE}
+                count={<FontAwesomeIcon icon={solid("plus")} />}
+              />
+            }
+          >
+            <h2>Halo</h2>
+          </Tab>
+          <Tab
             eventKey="active-notes"
             title={
               <TabTitleComponent
@@ -59,17 +70,6 @@ export class NoteTabsComponent extends Component {
                 title={ARCHIVED_NOTES}
                 count={2}
                 badgeType="secondary"
-              />
-            }
-          >
-            <h2>Halo</h2>
-          </Tab>
-          <Tab
-            eventKey="add-note"
-            title={
-              <TabTitleComponent
-                title={ADD_NOTE}
-                count={<FontAwesomeIcon icon={solid("plus")} />}
               />
             }
           >
