@@ -59,6 +59,7 @@ export class NoteTabsComponent extends Component {
           >
             <NotesListComponent
               notes={this.state.notes}
+              showArchive={false}
               onArchive={this.onArchiveHandler}
               onDelete={this.onDeleteHandler}
             />
@@ -73,7 +74,12 @@ export class NoteTabsComponent extends Component {
               />
             }
           >
-            <h2>Halo</h2>
+            <NotesListComponent
+              notes={this.state.notes}
+              showArchive={true}
+              onArchive={this.onArchiveHandler}
+              onDelete={this.onDeleteHandler}
+            />
           </Tab>
         </Tabs>
       </Container>
