@@ -9,7 +9,7 @@ const NotesListComponent = ({
   onDelete,
 }) => {
   return (
-    <Row className="pt-5">
+    <Row>
       {notes
         .filter((note) => note.archived === showArchive)
         .map((note) => {

@@ -6,6 +6,7 @@ import { getInitialData } from "../utils/MyData";
 import TabTitleComponent from "./TabTitleComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import NoteFormComponent from "./NoteFormComponent";
 
 export class NoteTabsComponent extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export class NoteTabsComponent extends Component {
         <Tabs
           defaultActiveKey="active-notes"
           id="fill-tab-notes"
-          className="mb-3 mt-5"
+          className="mb-5 mt-5"
           fill
         >
           <Tab
@@ -47,7 +48,7 @@ export class NoteTabsComponent extends Component {
               />
             }
           >
-            <h2>Halo</h2>
+            <NoteFormComponent />
           </Tab>
           <Tab
             eventKey="active-notes"
