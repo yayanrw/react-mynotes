@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NavBarComponent from "./NavBarComponent";
 import NotesListComponent from "./NotesListComponent";
 import { getInitialData } from "../utils/MyData";
+import JumbotronComponent from "./JumbotronComponent";
 
 export default class MyNotesApp extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class MyNotesApp extends Component {
     return (
       <div>
         <NavBarComponent />
+        <JumbotronComponent />
         <NotesListComponent
           notes={this.state.notes}
           onArchive={this.onArchiveHandler}
