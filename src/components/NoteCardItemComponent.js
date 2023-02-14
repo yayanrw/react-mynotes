@@ -29,11 +29,12 @@ const NoteCardItemComponent = ({
           <Button variant="default">
             <FontAwesomeIcon
               color="red"
+              title={archived ? "Unarchive" : "Archive"}
               icon={archived ? solid("heart") : regular("heart")}
             />
           </Button>
           <Button variant="default">
-            <FontAwesomeIcon icon={regular("trash-can")} />
+            <FontAwesomeIcon title="Delete" icon={regular("trash-can")} />
           </Button>
         </Card.Footer>
       </Card>
