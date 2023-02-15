@@ -32,7 +32,7 @@ const NoteCardItemComponent = ({
               color="red"
               title={archived ? "Unarchive" : "Archive"}
               icon={archived ? solid("heart") : regular("heart")}
-              onClick={archived ? () => onUnarchive() : () => onArchive()}
+              onClick={archived ? () => onUnarchive(id) : () => onArchive(id)}
             />
           </Button>
           <Button variant="default">

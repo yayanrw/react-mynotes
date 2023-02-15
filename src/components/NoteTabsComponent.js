@@ -31,23 +31,44 @@ export class NoteTabsComponent extends Component {
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
   }
 
-  onArchiveHandler() {
+  onArchiveHandler(id) {
     confirmationDialog(ARCHIVE, (confirmed) => {
       if (confirmed) {
+        this.setState((prevState) => ({
+          notes: prevState.notes.map((note) => {
+            if (note.id === id) {
+              console.log("lol");
+              return { ...note, archived: true };
+            }
+            return note;
+          }),
+        }));
+        console.log(this.state.notes);
       }
     });
   }
 
-  onUnarchiveHandler() {
+  onUnarchiveHandler(id) {
     confirmationDialog(UNARCHIVE, (confirmed) => {
       if (confirmed) {
+        this.setState((prevState) => ({
+          notes: prevState.notes.map((note) => {
+            if (note.id === id) {
+              return { ...note, archived: false };
+            }
+            return note;
+          }),
+        }));
       }
     });
   }
 
-  onDeleteHandler() {
+  onDeleteHandler(id) {
     confirmationDialog(DELETE, (confirmed) => {
       if (confirmed) {
+        this.setState((prevState) => ({
+          notes: prevState.notes.filter((note) => note.id !== id),
+        }));
       }
     });
   }
