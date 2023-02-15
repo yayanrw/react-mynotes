@@ -14,7 +14,7 @@ import TabTitleComponent from "./TabTitleComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import NoteFormComponent from "./NoteFormComponent";
-import { confirmationDialog } from "../utils/MyCustoms";
+import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
 
 export class NoteTabsComponent extends Component {
   constructor(props) {
@@ -40,6 +40,7 @@ export class NoteTabsComponent extends Component {
             return note;
           }),
         }));
+        swalSuccess(ARCHIVE);
       }
     });
   }
@@ -55,6 +56,7 @@ export class NoteTabsComponent extends Component {
             return note;
           }),
         }));
+        swalSuccess(UNARCHIVE);
       }
     });
   }
@@ -65,6 +67,7 @@ export class NoteTabsComponent extends Component {
         this.setState((prevState) => ({
           notes: prevState.notes.filter((note) => note.id !== id),
         }));
+        swalSuccess(DELETE);
       }
     });
   }
