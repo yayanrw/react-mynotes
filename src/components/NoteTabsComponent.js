@@ -74,7 +74,7 @@ export class NoteTabsComponent extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ minHeight: "800px" }}>
         <Tabs
           defaultActiveKey="active-notes"
           id="fill-tab-notes"
