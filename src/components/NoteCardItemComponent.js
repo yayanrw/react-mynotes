@@ -27,20 +27,18 @@ const NoteCardItemComponent = ({
           </footer>
         </Card.Body>
         <Card.Footer>
-          <Button variant="default">
+          <Button
+            variant="default"
+            onClick={archived ? () => onUnarchive(id) : () => onArchive(id)}
+          >
             <FontAwesomeIcon
               color="red"
               title={archived ? "Unarchive" : "Archive"}
               icon={archived ? solid("heart") : regular("heart")}
-              onClick={archived ? () => onUnarchive(id) : () => onArchive(id)}
             />
           </Button>
-          <Button variant="default">
-            <FontAwesomeIcon
-              title="Delete"
-              onClick={() => onDelete()}
-              icon={regular("trash-can")}
-            />
+          <Button variant="default" onClick={() => onDelete()}>
+            <FontAwesomeIcon title="Delete" icon={regular("trash-can")} />
           </Button>
         </Card.Footer>
       </Card>
