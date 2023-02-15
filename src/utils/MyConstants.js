@@ -30,3 +30,4 @@ export const DELETE_SUGGEST = "Deleted Successfully";
 export const ARCHIVE_SUGGEST = "Archived Successfully";
 export const UNARCHIVE_SUGGEST = "Unarchived Successfully";
 export const SUCCESS = "Success!";
+export const NO_NOTES = "Whoops there's no awesome notes, lets create it!";
