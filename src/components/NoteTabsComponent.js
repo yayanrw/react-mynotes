@@ -22,8 +22,6 @@ export class NoteTabsComponent extends Component {
 
     this.state = {
       notes: getInitialData(),
-      totalActive: getInitialData().filter((item) => !item.archived).length,
-      totalArchive: getInitialData().filter((item) => item.archived).length,
     };
 
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
@@ -37,13 +35,11 @@ export class NoteTabsComponent extends Component {
         this.setState((prevState) => ({
           notes: prevState.notes.map((note) => {
             if (note.id === id) {
-              console.log("lol");
               return { ...note, archived: true };
             }
             return note;
           }),
         }));
-        console.log(this.state.notes);
       }
     });
   }
@@ -98,7 +94,7 @@ export class NoteTabsComponent extends Component {
             title={
               <TabTitleComponent
                 title={ACTIVE_NOTES}
-                count={this.state.totalActive}
+                count={this.state.notes.filter((item) => !item.archived).length}
                 badgeType="primary"
               />
             }
@@ -116,7 +112,7 @@ export class NoteTabsComponent extends Component {
             title={
               <TabTitleComponent
                 title={ARCHIVED_NOTES}
-                count={this.state.totalArchive}
+                count={this.state.notes.filter((item) => item.archived).length}
                 badgeType="secondary"
               />
             }
