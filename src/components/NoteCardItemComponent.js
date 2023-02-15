@@ -37,7 +37,7 @@ const NoteCardItemComponent = ({
               icon={archived ? solid("heart") : regular("heart")}
             />
           </Button>
-          <Button variant="default" onClick={() => onDelete()}>
+          <Button variant="default" onClick={() => onDelete(id)}>
             <FontAwesomeIcon title="Delete" icon={regular("trash-can")} />
           </Button>
         </Card.Footer>
