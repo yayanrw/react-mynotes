@@ -15,13 +15,31 @@ export class MyNotesApp extends Component {
       notes: getInitialData(),
     };
 
+    this.onAddNotesHandler = this.onAddNotesHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
-  onArchiveHandler(id) {
+  onAddNotesHandler = ({ title, body }) => {
+    this.setState((prevState) => {
+      return {
+        notes: [
+          ...prevState.notes,
+          {
+            id: +new Date(),
+            title: title,
+            body: body,
+            createdAt: new Date().toISOString(),
+            archived: false,
+          },
+        ],
+      };
+    });
+  };
+
+  onArchiveHandler = (id) => {
     confirmationDialog(ARCHIVE, (confirmed) => {
       if (confirmed) {
         this.setState((prevState) => ({
@@ -35,9 +53,9 @@ export class MyNotesApp extends Component {
         swalSuccess(ARCHIVE);
       }
     });
-  }
+  };
 
-  onUnarchiveHandler(id) {
+  onUnarchiveHandler = (id) => {
     confirmationDialog(UNARCHIVE, (confirmed) => {
       if (confirmed) {
         this.setState((prevState) => ({
@@ -51,9 +69,9 @@ export class MyNotesApp extends Component {
         swalSuccess(UNARCHIVE);
       }
     });
-  }
+  };
 
-  onDeleteHandler(id) {
+  onDeleteHandler = (id) => {
     confirmationDialog(DELETE, (confirmed) => {
       if (confirmed) {
         this.setState((prevState) => ({
@@ -62,9 +80,9 @@ export class MyNotesApp extends Component {
         swalSuccess(DELETE);
       }
     });
-  }
+  };
 
-  onSearchHandler(search) {
+  onSearchHandler = (search) => {
     const initialNotes = getInitialData();
     const filteredNotes = initialNotes.filter((note) => {
       return note.title.toLowerCase().includes(search.toLowerCase());
@@ -73,7 +91,7 @@ export class MyNotesApp extends Component {
     this.setState({
       notes: filteredNotes,
     });
-  }
+  };
 
   render() {
     return (
@@ -85,6 +103,7 @@ export class MyNotesApp extends Component {
           onArchive={this.onArchiveHandler}
           onUnarchive={this.onUnarchiveHandler}
           onDelete={this.onDeleteHandler}
+          onAddNotes={this.onAddNotesHandler}
         />
         <FooterComponent />
       </div>

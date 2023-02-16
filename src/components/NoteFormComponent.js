@@ -11,14 +11,35 @@ export class NoteFormComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      title: "",
+      body: "",
+    };
+
+    this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
+    this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
+    this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this);
   }
 
   onSubmitEventHandler(event) {
     event.preventDefault();
     confirmationDialog(INSERT, (confirmed) => {
       if (confirmed) {
+        console.log(this.state);
+        this.props.onAddNotes(this.state);
       }
+    });
+  }
+
+  onTitleChangeHandler(event) {
+    this.setState({
+      title: event.target.value,
+    });
+  }
+
+  onBodyChangeHandler(event) {
+    this.setState({
+      body: event.target.value,
     });
   }
 
@@ -37,6 +58,8 @@ export class NoteFormComponent extends Component {
                   <Form.Control
                     type="text"
                     placeholder={NOTE_TITLE_PLACEHOLDER}
+                    required
+                    onChange={this.onTitleChangeHandler}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicBody">
@@ -45,6 +68,8 @@ export class NoteFormComponent extends Component {
                     as="textarea"
                     rows={5}
                     placeholder={NOTE_DETAIL_PLACEHOLDER}
+                    required
+                    onChange={this.onBodyChangeHandler}
                   />
                 </Form.Group>
                 <Button variant="primary" type="submit">

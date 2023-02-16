@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import NoteFormComponent from "./NoteFormComponent";
 
-const NoteTabsComponent = ({ notes, onArchive, onUnarchive, onDelete }) => {
+const NoteTabsComponent = ({ notes, onAddNotes, onArchive, onUnarchive, onDelete }) => {
   return (
     <Container style={{ minHeight: "800px" }}>
       <Tabs
@@ -25,7 +25,7 @@ const NoteTabsComponent = ({ notes, onArchive, onUnarchive, onDelete }) => {
             />
           }
         >
-          <NoteFormComponent />
+          <NoteFormComponent onAddNotes={onAddNotes} />
         </Tab>
         <Tab
           eventKey="active-notes"
