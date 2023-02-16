@@ -18,6 +18,7 @@ export class MyNotesApp extends Component {
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
   onArchiveHandler(id) {
@@ -64,18 +65,21 @@ export class MyNotesApp extends Component {
   }
 
   onSearchHandler(search) {
-    this.setState((prevState) => ({
-      notes: prevState.notes.filter((note) => {
-        return note.title.toLowerCase().includes(search.toLowerCase());
-      }),
-    }));
+    const initialNotes = getInitialData();
+    const filteredNotes = initialNotes.filter((note) => {
+      return note.title.toLowerCase().includes(search.toLowerCase());
+    });
+
+    this.setState({
+      notes: filteredNotes,
+    });
   }
 
   render() {
     return (
       <div>
         <NavBarComponent />
-        <JumbotronComponent />
+        <JumbotronComponent onSearch={this.onSearchHandler} />
         <NoteTabsComponent
           notes={this.state.notes}
           onArchive={this.onArchiveHandler}
