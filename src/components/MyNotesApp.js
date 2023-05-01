@@ -6,12 +6,29 @@ import { addNote, archivedNote, deleteNote, getNotes } from "../utils/MyData";
 import { ARCHIVE, DELETE, INSERT, UNARCHIVE } from "../utils/MyConstants";
 import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
 import Navigation from "./Navigation";
-import { Route, Routes } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  createSearchParams,
+  useSearchParams,
+} from "react-router-dom";
 import AddPage from "../pages/AddPage";
 import ActivePage from "../pages/ActivePage";
 import ArchivePage from "../pages/ArchivePage";
 import { Container } from "react-bootstrap";
 import DetailPage from "../pages/DetailPage";
+
+const MyNotesAppWrapper = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const keyword = searchParams.get("keyword");
+
+  const changeSearchParams = (keyword) => {
+    setSearchParams({ keyword });
+  };
+
+  return <MyNotesApp defaultKeyword={keyword} keywordChange={changeSearchParams} />
+};
 
 export class MyNotesApp extends Component {
   constructor(props) {
@@ -19,13 +36,14 @@ export class MyNotesApp extends Component {
 
     this.state = {
       notes: getNotes(),
+      keyword: props.defaultKeyword || "",
     };
 
     this.onAddNotesHandler = this.onAddNotesHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onSearchHandler = this.onSearchHandler.bind(this);
+    this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
   }
 
   onAddNotesHandler = (contact) => {
@@ -85,23 +103,31 @@ export class MyNotesApp extends Component {
     });
   };
 
-  onSearchHandler = (search) => {
-    const initialNotes = getNotes();
-    const filteredNotes = initialNotes.filter((note) => {
-      return note.title.toLowerCase().includes(search.toLowerCase());
+  onKeywordChangeHandler = (keyword) => {
+    this.setState(() => {
+      return {
+        keyword,
+      };
     });
 
-    this.setState({
-      notes: filteredNotes,
-    });
+    this.props.keywordChange(keyword)
   };
 
   render() {
+    const notes = this.state.notes.filter((note) => {
+      return note.title
+        .toLowerCase()
+        .includes(this.state.keyword.toLowerCase());
+    });
+
     return (
       <div>
         <NavBarComponent />
-        <JumbotronComponent onSearch={this.onSearchHandler} />
-        <Navigation notes={this.state.notes} />
+        <JumbotronComponent
+          keyword={this.state.keyword}
+          onKeywordChangeHandler={this.onKeywordChangeHandler}
+        />
+        <Navigation notes={notes} />
         <Container style={{ minHeight: "800px" }}>
           <main>
             <Routes>
@@ -113,7 +139,7 @@ export class MyNotesApp extends Component {
                 path="/"
                 element={
                   <ActivePage
-                    notes={this.state.notes}
+                    notes={notes}
                     onArchive={this.onArchiveHandler}
                     onUnarchive={this.onUnarchiveHandler}
                     onDelete={this.onDeleteHandler}
@@ -124,7 +150,7 @@ export class MyNotesApp extends Component {
                 path="/archived-notes"
                 element={
                   <ArchivePage
-                    notes={this.state.notes}
+                    notes={notes}
                     onArchive={this.onArchiveHandler}
                     onUnarchive={this.onUnarchiveHandler}
                     onDelete={this.onDeleteHandler}
@@ -142,4 +168,4 @@ export class MyNotesApp extends Component {
   }
 }
 
-export default MyNotesApp;
+export default MyNotesAppWrapper;
