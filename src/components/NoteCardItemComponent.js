@@ -3,6 +3,7 @@ import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { showFormattedDate } from "../utils/MyCustoms";
+import { useNavigate } from "react-router-dom";
 
 const NoteCardItemComponent = ({
   title,
@@ -14,6 +15,8 @@ const NoteCardItemComponent = ({
   onUnarchive,
   onDelete,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Col lg="3" className="pb-4">
       <Card className="card-height">
@@ -27,7 +30,10 @@ const NoteCardItemComponent = ({
           </footer>
         </Card.Body>
         <Card.Footer>
-          <Button variant="default" onClick={() => onDelete(id)}>
+          <Button
+            variant="default"
+            onClick={() => navigate(`/detail-note/${id}`)}
+          >
             <FontAwesomeIcon
               color="cornflowerblue"
               title="Detail"
