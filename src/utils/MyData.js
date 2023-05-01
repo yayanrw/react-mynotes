@@ -47,6 +47,11 @@ const getNotes = () => {
   return notes;
 };
 
+const getNote = (id) => {
+  return notes.find((note) => note.id === id);
+};
+
+
 const addNote = (note) => {
   notes = [
     ...notes,
@@ -76,4 +81,4 @@ const archivedNote = (id, isArchived) => {
   });
 };
 
-export { getNotes, addNote, deleteNote, archivedNote };
+export { getNotes, getNote, addNote, deleteNote, archivedNote };
