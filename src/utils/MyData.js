@@ -1,4 +1,4 @@
-const getInitialData = () => [
+let notes = [
   {
     id: 1,
     title: "Babel",
@@ -43,4 +43,24 @@ const getInitialData = () => [
   },
 ];
 
-export { getInitialData };
+const getNotes = () => {
+  return notes;
+};
+
+const addNote = (note) => {
+  notes = [
+    ...notes,
+    {
+      id: +new Date(),
+      createdAt: new Date().toISOString(),
+      archived: false,
+      ...note,
+    },
+  ];
+};
+
+const deleteNote = (note) => {
+  notes = notes.filter((note) => notes.id !== note.id);
+};
+
+export { getNotes, addNote, deleteNote };
