@@ -6,18 +6,14 @@ import { addNote, archivedNote, deleteNote, getNotes } from "../utils/MyData";
 import { ARCHIVE, DELETE, INSERT, UNARCHIVE } from "../utils/MyConstants";
 import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
 import Navigation from "./Navigation";
-import {
-  Route,
-  Routes,
-  createSearchParams,
-  useSearchParams,
-} from "react-router-dom";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 import AddPage from "../pages/AddPage";
 import ActivePage from "../pages/ActivePage";
 import ArchivePage from "../pages/ArchivePage";
 import { Container } from "react-bootstrap";
 import DetailPage from "../pages/DetailPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import PropTypes from "prop-types";
 
 const MyNotesAppWrapper = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -171,5 +167,10 @@ export class MyNotesApp extends Component {
     );
   }
 }
+
+MyNotesApp.propTypes = {
+  defaultKeyword: PropTypes.string,
+  keywordChange: PropTypes.func.isRequired,
+};
 
 export default MyNotesAppWrapper;

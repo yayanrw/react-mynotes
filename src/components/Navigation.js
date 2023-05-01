@@ -3,12 +3,11 @@ import { Container, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import TabTitleComponent from "./TabTitleComponent";
 import { ACTIVE_NOTES, ADD_NOTE, ARCHIVED_NOTES } from "../utils/MyConstants";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import PropTypes from "prop-types";
 
 const Navigation = ({ notes }) => {
   const location = useLocation();
-  
+
   return (
     <Container>
       <Nav justify variant="tabs" defaultActiveKey="/" className="mb-5 mt-5">
@@ -19,10 +18,7 @@ const Navigation = ({ notes }) => {
             eventKey="/add-notes"
             active={location.pathname.startsWith("/add-notes")}
           >
-            <TabTitleComponent
-              title={ADD_NOTE}
-              count={<FontAwesomeIcon icon={solid("plus")} />}
-            />
+            <TabTitleComponent title={ADD_NOTE} count={99} />
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -56,6 +52,10 @@ const Navigation = ({ notes }) => {
       </Nav>
     </Container>
   );
+};
+
+Navigation.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Navigation;

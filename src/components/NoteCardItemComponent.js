@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { showFormattedDate } from "../utils/MyCustoms";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const NoteCardItemComponent = ({
   title,
@@ -57,6 +58,17 @@ const NoteCardItemComponent = ({
       </Card>
     </Col>
   );
+};
+
+NoteCardItemComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  archived: PropTypes.bool.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onUnarchive: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default NoteCardItemComponent;

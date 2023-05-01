@@ -10,6 +10,7 @@ import {
 import { showFormattedDate } from "../utils/MyCustoms";
 import { useParams } from "react-router-dom";
 import { getNote } from "../utils/MyData";
+import PropTypes from "prop-types";
 
 const DetailPageWrapper = () => {
   const { id } = useParams();
@@ -25,7 +26,6 @@ class DetailPage extends Component {
   }
 
   render() {
-    console.log(this.state.note);
     return (
       <Row>
         {this.state.note === null || this.state.note === undefined ? (
@@ -80,5 +80,9 @@ class DetailPage extends Component {
     );
   }
 }
+
+DetailPage.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default DetailPageWrapper;

@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import NoteCardItemComponent from "./NoteCardItemComponent";
 import { NO_NOTES } from "../utils/MyConstants";
+import PropTypes from "prop-types";
 
 const NotesListComponent = ({
   notes,
@@ -34,6 +35,14 @@ const NotesListComponent = ({
       )}
     </Row>
   );
+};
+
+NotesListComponent.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showArchive: PropTypes.bool,
+  onArchive: PropTypes.func.isRequired,
+  onUnarchive: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default NotesListComponent;

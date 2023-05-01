@@ -6,6 +6,7 @@ import {
   NOTE_TITLE_PLACEHOLDER,
 } from "../utils/MyConstants";
 import { confirmationDialog } from "../utils/MyCustoms";
+import PropTypes from "prop-types";
 
 export class NoteFormComponent extends Component {
   constructor(props) {
@@ -81,6 +82,10 @@ export class NoteFormComponent extends Component {
       </Row>
     );
   }
+}
+
+NoteFormComponent.propTypes = {
+  onAddNotes: PropTypes.func.isRequired
 }
 
 export default NoteFormComponent;
