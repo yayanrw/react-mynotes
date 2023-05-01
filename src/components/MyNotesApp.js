@@ -17,6 +17,7 @@ import ActivePage from "../pages/ActivePage";
 import ArchivePage from "../pages/ArchivePage";
 import { Container } from "react-bootstrap";
 import DetailPage from "../pages/DetailPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const MyNotesAppWrapper = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,7 +28,9 @@ const MyNotesAppWrapper = () => {
     setSearchParams({ keyword });
   };
 
-  return <MyNotesApp defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  return (
+    <MyNotesApp defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  );
 };
 
 export class MyNotesApp extends Component {
@@ -110,7 +113,7 @@ export class MyNotesApp extends Component {
       };
     });
 
-    this.props.keywordChange(keyword)
+    this.props.keywordChange(keyword);
   };
 
   render() {
@@ -158,6 +161,7 @@ export class MyNotesApp extends Component {
                 }
               />
               <Route path="/detail-note/:id" element={<DetailPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
         </Container>
