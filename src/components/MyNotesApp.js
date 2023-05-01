@@ -101,7 +101,7 @@ export class MyNotesApp extends Component {
         <NavBarComponent />
         <JumbotronComponent onSearch={this.onSearchHandler} />
         <Navigation notes={this.state.notes} />
-        <Container>
+        <Container style={{ minHeight: "800px" }}>
           <main>
             <Routes>
               <Route
