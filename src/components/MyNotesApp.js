@@ -11,6 +11,7 @@ import AddPage from "../pages/AddPage";
 import ActivePage from "../pages/ActivePage";
 import ArchivePage from "../pages/ArchivePage";
 import { Container } from "react-bootstrap";
+import DetailPage from "../pages/DetailPage";
 
 export class MyNotesApp extends Component {
   constructor(props) {
@@ -130,6 +131,7 @@ export class MyNotesApp extends Component {
                   />
                 }
               />
+              <Route path="/detail-note/:id" element={<DetailPage />} />
             </Routes>
           </main>
         </Container>
