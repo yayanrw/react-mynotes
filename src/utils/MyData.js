@@ -51,7 +51,6 @@ const getNote = (id) => {
   return notes.find((note) => note.id === id);
 };
 
-
 const addNote = (note) => {
   notes = [
     ...notes,
@@ -71,7 +70,6 @@ const deleteNote = (id) => {
 const archivedNote = (id, isArchived) => {
   notes = notes.map((note) => {
     if (note.id === id) {
-      console.log("asu");
       return {
         ...note,
         archived: isArchived,
