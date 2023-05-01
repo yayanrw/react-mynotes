@@ -59,8 +59,20 @@ const addNote = (note) => {
   ];
 };
 
-const deleteNote = (note) => {
-  notes = notes.filter((note) => notes.id !== note.id);
+const deleteNote = (id) => {
+  notes = notes.filter((note) => notes.id !== id);
 };
 
-export { getNotes, addNote, deleteNote };
+const archivedNote = ({ id, isArchived }) => {
+  notes = notes.map((note) => {
+    if (note.id === id) {
+      return {
+        ...note,
+        archived: isArchived,
+      };
+    }
+    return note;
+  });
+};
+
+export { getNotes, addNote, deleteNote, archivedNote };
