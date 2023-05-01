@@ -1,13 +1,9 @@
 import React from "react";
 import NoteFormComponent from "../components/NoteFormComponent";
-import { addNote } from "../utils/MyData";
 
-const AddPage = () => {
-  const onAddNotesHandler = (contact) => {
-    addNote(contact);
-  };
+const AddPage = ({onAddNotes}) => {
 
-  return <NoteFormComponent onAddNotes={onAddNotesHandler} />;
+  return <NoteFormComponent onAddNotes={onAddNotes} />;
 };
 
 export default AddPage;

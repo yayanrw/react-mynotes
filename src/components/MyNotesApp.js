@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import NavBarComponent from "./NavBarComponent";
 import JumbotronComponent from "./JumbotronComponent";
 import FooterComponent from "./FooterComponent";
-import { archivedNote, deleteNote, getNotes } from "../utils/MyData";
-import { ARCHIVE, DELETE, UNARCHIVE } from "../utils/MyConstants";
+import { addNote, archivedNote, deleteNote, getNotes } from "../utils/MyData";
+import { ARCHIVE, DELETE, INSERT, UNARCHIVE } from "../utils/MyConstants";
 import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
 import Navigation from "./Navigation";
 import { Route, Routes } from "react-router-dom";
@@ -20,11 +20,23 @@ export class MyNotesApp extends Component {
       notes: getNotes(),
     };
 
+    this.onAddNotesHandler = this.onAddNotesHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
   }
+
+  onAddNotesHandler = (contact) => {
+    addNote(contact);
+    swalSuccess(INSERT);
+
+    this.setState(() => {
+      return {
+        notes: getNotes(),
+      };
+    });
+  };
 
   onArchiveHandler = (id) => {
     confirmationDialog(ARCHIVE, (confirmed) => {
@@ -92,7 +104,10 @@ export class MyNotesApp extends Component {
         <Container>
           <main>
             <Routes>
-              <Route path="/add-notes" element={<AddPage />} />
+              <Route
+                path="/add-notes"
+                element={<AddPage onAddNotes={this.onAddNotesHandler} />}
+              />
               <Route
                 path="/"
                 element={
