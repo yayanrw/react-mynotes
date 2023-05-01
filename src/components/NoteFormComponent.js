@@ -25,7 +25,6 @@ export class NoteFormComponent extends Component {
     event.preventDefault();
     confirmationDialog(INSERT, (confirmed) => {
       if (confirmed) {
-        console.log(this.state);
         this.props.onAddNotes(this.state);
       }
     });
