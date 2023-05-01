@@ -63,9 +63,10 @@ const deleteNote = (id) => {
   notes = notes.filter((note) => note.id !== id);
 };
 
-const archivedNote = ({ id, isArchived }) => {
+const archivedNote = (id, isArchived) => {
   notes = notes.map((note) => {
     if (note.id === id) {
+      console.log("asu");
       return {
         ...note,
         archived: isArchived,
