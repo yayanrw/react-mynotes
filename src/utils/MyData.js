@@ -60,7 +60,7 @@ const addNote = (note) => {
 };
 
 const deleteNote = (id) => {
-  notes = notes.filter((note) => notes.id !== id);
+  notes = notes.filter((note) => note.id !== id);
 };
 
 const archivedNote = ({ id, isArchived }) => {
