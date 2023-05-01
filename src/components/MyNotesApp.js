@@ -1,56 +1,43 @@
 import React, { Component } from "react";
 import NavBarComponent from "./NavBarComponent";
 import JumbotronComponent from "./JumbotronComponent";
-import NoteTabsComponent from "./NoteTabsComponent";
 import FooterComponent from "./FooterComponent";
-import { getInitialData } from "../utils/MyData";
+import { archivedNote, deleteNote, getNotes } from "../utils/MyData";
 import { ARCHIVE, DELETE, UNARCHIVE } from "../utils/MyConstants";
 import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
+import Navigation from "./Navigation";
+import { Route, Routes } from "react-router-dom";
+import AddPage from "../pages/AddPage";
+import ActivePage from "../pages/ActivePage";
+import ArchivePage from "../pages/ArchivePage";
+import { Container } from "react-bootstrap";
 
 export class MyNotesApp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: getInitialData(),
+      notes: getNotes(),
     };
 
-    this.onAddNotesHandler = this.onAddNotesHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
-  onAddNotesHandler = ({ title, body }) => {
-    this.setState((prevState) => {
-      return {
-        notes: [
-          ...prevState.notes,
-          {
-            id: +new Date(),
-            title: title,
-            body: body,
-            createdAt: new Date().toISOString(),
-            archived: false,
-          },
-        ],
-      };
-    });
-  };
-
   onArchiveHandler = (id) => {
     confirmationDialog(ARCHIVE, (confirmed) => {
       if (confirmed) {
-        this.setState((prevState) => ({
-          notes: prevState.notes.map((note) => {
-            if (note.id === id) {
-              return { ...note, archived: true };
-            }
-            return note;
-          }),
-        }));
+        archivedNote(id, true);
+
         swalSuccess(ARCHIVE);
+
+        this.setState(() => {
+          return {
+            notes: getNotes(),
+          };
+        });
       }
     });
   };
@@ -58,15 +45,14 @@ export class MyNotesApp extends Component {
   onUnarchiveHandler = (id) => {
     confirmationDialog(UNARCHIVE, (confirmed) => {
       if (confirmed) {
-        this.setState((prevState) => ({
-          notes: prevState.notes.map((note) => {
-            if (note.id === id) {
-              return { ...note, archived: false };
-            }
-            return note;
-          }),
-        }));
+        archivedNote(id, false);
         swalSuccess(UNARCHIVE);
+
+        this.setState(() => {
+          return {
+            notes: getNotes(),
+          };
+        });
       }
     });
   };
@@ -74,16 +60,20 @@ export class MyNotesApp extends Component {
   onDeleteHandler = (id) => {
     confirmationDialog(DELETE, (confirmed) => {
       if (confirmed) {
-        this.setState((prevState) => ({
-          notes: prevState.notes.filter((note) => note.id !== id),
-        }));
+        deleteNote(id);
         swalSuccess(DELETE);
+
+        this.setState(() => {
+          return {
+            notes: getNotes(),
+          };
+        });
       }
     });
   };
 
   onSearchHandler = (search) => {
-    const initialNotes = getInitialData();
+    const initialNotes = getNotes();
     const filteredNotes = initialNotes.filter((note) => {
       return note.title.toLowerCase().includes(search.toLowerCase());
     });
@@ -98,13 +88,37 @@ export class MyNotesApp extends Component {
       <div>
         <NavBarComponent />
         <JumbotronComponent onSearch={this.onSearchHandler} />
-        <NoteTabsComponent
-          notes={this.state.notes}
-          onArchive={this.onArchiveHandler}
-          onUnarchive={this.onUnarchiveHandler}
-          onDelete={this.onDeleteHandler}
-          onAddNotes={this.onAddNotesHandler}
-        />
+        <Navigation notes={this.state.notes} />
+        <Container>
+          <main>
+            <Routes>
+              <Route path="/add-notes" element={<AddPage />} />
+              <Route
+                path="/"
+                element={
+                  <ActivePage
+                    notes={this.state.notes}
+                    onArchive={this.onArchiveHandler}
+                    onUnarchive={this.onUnarchiveHandler}
+                    onDelete={this.onDeleteHandler}
+                  />
+                }
+              />
+              <Route
+                path="/archived-notes"
+                element={
+                  <ArchivePage
+                    notes={this.state.notes}
+                    onArchive={this.onArchiveHandler}
+                    onUnarchive={this.onUnarchiveHandler}
+                    onDelete={this.onDeleteHandler}
+                  />
+                }
+              />
+            </Routes>
+          </main>
+        </Container>
+
         <FooterComponent />
       </div>
     );

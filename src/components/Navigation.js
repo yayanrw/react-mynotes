@@ -8,11 +8,11 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const Navigation = ({ notes }) => {
   return (
-    <Container style={{ minHeight: "800px" }}>
+    <Container>
       <Nav
         justify
         variant="tabs"
-        defaultActiveKey="/active-notes"
+        defaultActiveKey="/"
         className="mb-5 mt-5"
       >
         <Nav.Item>
@@ -24,7 +24,7 @@ const Navigation = ({ notes }) => {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to="/active-notes" eventKey="/active-notes">
+          <Nav.Link as={Link} to="/" eventKey="/">
             <TabTitleComponent
               title={ACTIVE_NOTES}
               count={notes.filter((item) => !item.archived).length}
