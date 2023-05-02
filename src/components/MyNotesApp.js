@@ -5,7 +5,6 @@ import FooterComponent from "./FooterComponent";
 import { addNote, archivedNote, deleteNote, getNotes } from "../utils/MyData";
 import { ARCHIVE, DELETE, INSERT, UNARCHIVE } from "../utils/MyConstants";
 import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
-import Navigation from "./Navigation";
 import { Route, Routes, useSearchParams } from "react-router-dom";
 import AddPage from "../pages/AddPage";
 import ActivePage from "../pages/ActivePage";
@@ -14,6 +13,7 @@ import { Container } from "react-bootstrap";
 import DetailPage from "../pages/DetailPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import PropTypes from "prop-types";
+import NavigationComponent from "./NavigationComponent";
 
 const MyNotesAppWrapper = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -126,7 +126,7 @@ export class MyNotesApp extends Component {
           keyword={this.state.keyword}
           onKeywordChangeHandler={this.onKeywordChangeHandler}
         />
-        <Navigation notes={notes} />
+        <NavigationComponent notes={notes} />
         <Container style={{ minHeight: "800px" }}>
           <main>
             <Routes>

@@ -5,7 +5,7 @@ import TabTitleComponent from "./TabTitleComponent";
 import { ACTIVE_NOTES, ADD_NOTE, ARCHIVED_NOTES } from "../utils/MyConstants";
 import PropTypes from "prop-types";
 
-const Navigation = ({ notes }) => {
+const NavigationComponent = ({ notes }) => {
   const location = useLocation();
 
   return (
@@ -54,8 +54,8 @@ const Navigation = ({ notes }) => {
   );
 };
 
-Navigation.propTypes = {
+NavigationComponent.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default Navigation;
+export default NavigationComponent;
