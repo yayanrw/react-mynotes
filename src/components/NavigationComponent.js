@@ -2,10 +2,11 @@ import React from "react";
 import { Container, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import TabTitleComponent from "./TabTitleComponent";
-import { ACTIVE_NOTES, ADD_NOTE, ARCHIVED_NOTES } from "../utils/MyConstants";
 import PropTypes from "prop-types";
+import useLocalization from "../hooks/useLocalization";
 
 const NavigationComponent = ({ notes }) => {
+  const localization = useLocalization("nav");
   const location = useLocation();
 
   return (
@@ -18,7 +19,7 @@ const NavigationComponent = ({ notes }) => {
             eventKey="/add-notes"
             active={location.pathname.startsWith("/add-notes")}
           >
-            <TabTitleComponent title={ADD_NOTE} count={99} />
+            <TabTitleComponent title={localization.addNewNote} count={99} />
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -29,7 +30,7 @@ const NavigationComponent = ({ notes }) => {
             active={location.pathname === "/"}
           >
             <TabTitleComponent
-              title={ACTIVE_NOTES}
+              title={localization.activeNotes}
               count={notes.filter((item) => !item.archived).length}
               badgeType="primary"
             />
@@ -43,7 +44,7 @@ const NavigationComponent = ({ notes }) => {
             active={location.pathname.startsWith("/archived-notes")}
           >
             <TabTitleComponent
-              title={ARCHIVED_NOTES}
+              title={localization.archivedNotes}
               count={notes.filter((item) => item.archived).length}
               badgeType="secondary"
             />
