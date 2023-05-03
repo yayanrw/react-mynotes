@@ -1,16 +1,18 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { AWESOME_QUOTE } from "../utils/MyConstants";
 import SearchComponent from "./SearchComponent";
 import PropTypes from "prop-types";
+import useLocalization from "../hooks/useLocalization";
 
 const JumbotronComponent = ({ keyword, onKeywordChangeHandler }) => {
+  const localization = useLocalization("app");
+
   return (
     <Container fluid>
       <Row className="p-5 bg-dark text-center text-white">
         <Col className="px-5">
           <Container>
-            <h2>{AWESOME_QUOTE}</h2>
+            <h2>{localization.appQuote}</h2>
             <SearchComponent
               keyword={keyword}
               keywordChange={onKeywordChangeHandler}
