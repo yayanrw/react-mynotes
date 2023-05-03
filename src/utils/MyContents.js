@@ -52,6 +52,7 @@ const input = {
     titlePlaceholder: "Ketik judul catatanmu di sini",
     detailPlaceholder: "Ketik detail catatanmu di sini",
     searchPlaceholder: "Cari catatan keren mu...",
+    search: "Cari",
     submit: "Simpan",
   },
   en: {
@@ -60,6 +61,7 @@ const input = {
     titlePlaceholder: "Type your awesome note title",
     detailPlaceholder: "Type your awesome note detail",
     searchPlaceholder: "Search your awesome notes...",
+    search: "Search",
     submit: "Submit",
   },
 };
@@ -114,4 +116,4 @@ const pageNotFound = {
   },
 };
 
-export { app, nav, card, input, swal, pageNotFound };
+export const myContents = { app, nav, card, input, swal, pageNotFound };
