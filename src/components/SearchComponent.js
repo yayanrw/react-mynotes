@@ -1,16 +1,18 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { SEARCH_PLACEHOLDER } from "../utils/MyConstants";
 import PropTypes from "prop-types";
+import useLocalization from "../hooks/useLocalization";
 
 const SearchComponent = ({ keyword, keywordChange }) => {
+  const localization = useLocalization("input");
+
   return (
     <Form className="d-flex pt-5 px-5">
       <Form.Control
         type="search"
-        placeholder={SEARCH_PLACEHOLDER}
+        placeholder={localization.searchPlaceholder}
         className="me-2 py-3 px-5"
-        aria-label="Search"
+        aria-label={localization.search}
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)}
       />
