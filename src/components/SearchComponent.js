@@ -11,6 +11,7 @@ const SearchComponent = ({ keyword, keywordChange }) => {
         placeholder={SEARCH_PLACEHOLDER}
         className="me-2 py-3 px-5"
         aria-label="Search"
+        value={keyword}
         onChange={(event) => keywordChange(event.target.value)}
       />
     </Form>
