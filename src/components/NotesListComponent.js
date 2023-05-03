@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import NoteCardItemComponent from "./NoteCardItemComponent";
-import { NO_NOTES } from "../utils/MyConstants";
 import PropTypes from "prop-types";
+import useLocalization from "../hooks/useLocalization";
 
 const NotesListComponent = ({
   notes,
@@ -12,6 +12,7 @@ const NotesListComponent = ({
   onDelete,
 }) => {
   const filteredNotes = notes.filter((note) => note.archived === showArchive);
+  const localization = useLocalization("swal");
 
   return (
     <Row>
@@ -30,7 +31,7 @@ const NotesListComponent = ({
         })
       ) : (
         <Col className="text-center mt-5 pt-5" as="h5">
-          {NO_NOTES}
+          {localization.noNotes}
         </Col>
       )}
     </Row>
