@@ -1,3 +1,5 @@
 import { createContext } from "react";
 
-export const LocalizationContext = createContext();
+const LocalizationContext = createContext();
+
+export default LocalizationContext;
