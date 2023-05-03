@@ -109,10 +109,12 @@ const swal = {
 
 const pageNotFound = {
   id: {
-    message: "Halaman tidak ditemukan",
+    message: "404 - Halaman tidak ditemukan",
+    detailMessage: "Halaman yang Anda cari tidak ditemukan",
   },
   en: {
-    message: "Page not found",
+    message: "404 - Page Not Found",
+    detailMessage: "The page you are looking for does not exist.",
   },
 };
 
