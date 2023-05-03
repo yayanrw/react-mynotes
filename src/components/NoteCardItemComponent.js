@@ -5,6 +5,7 @@ import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { showFormattedDate } from "../utils/MyCustoms";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import useLocalization from "../hooks/useLocalization";
 
 const NoteCardItemComponent = ({
   title,
@@ -17,6 +18,7 @@ const NoteCardItemComponent = ({
   onDelete,
 }) => {
   const navigate = useNavigate();
+  const localization = useLocalization("card");
 
   return (
     <Col lg="3" className="pb-4">
@@ -37,7 +39,7 @@ const NoteCardItemComponent = ({
           >
             <FontAwesomeIcon
               color="cornflowerblue"
-              title="Detail"
+              title={localization.detail}
               icon={regular("eye")}
             />
           </Button>
@@ -47,12 +49,15 @@ const NoteCardItemComponent = ({
           >
             <FontAwesomeIcon
               color="red"
-              title={archived ? "Unarchive" : "Archive"}
+              title={archived ? localization.unarchive : localization.archive}
               icon={archived ? solid("heart") : regular("heart")}
             />
           </Button>
           <Button variant="default" onClick={() => onDelete(id)}>
-            <FontAwesomeIcon title="Delete" icon={regular("trash-can")} />
+            <FontAwesomeIcon
+              title={localization.delete}
+              icon={regular("trash-can")}
+            />
           </Button>
         </Card.Footer>
       </Card>
