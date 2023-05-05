@@ -1,91 +1,70 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-import {
-  INSERT,
-  NOTE_DETAIL_PLACEHOLDER,
-  NOTE_TITLE_PLACEHOLDER,
-} from "../utils/MyConstants";
 import { confirmationDialog } from "../utils/MyCustoms";
 import PropTypes from "prop-types";
+import useInput from "../hooks/useInput";
+import useLocalization from "../hooks/useLocalization";
+import { INSERT } from "../utils/MyConstants";
 
-export class NoteFormComponent extends Component {
-  constructor(props) {
-    super(props);
+const NoteFormComponent = ({ onAddNotes }) => {
+  const [title, setTitle] = useInput("");
+  const [body, setBody] = useInput("");
+  const localizationInput = useLocalization("input");
+  const localizationCard = useLocalization("card");
 
-    this.state = {
-      title: "",
-      body: "",
-    };
-
-    this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
-    this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
-    this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this);
-  }
-
-  onSubmitEventHandler(event) {
+  const onSubmitEventHandler = (event) => {
     event.preventDefault();
     confirmationDialog(INSERT, (confirmed) => {
       if (confirmed) {
-        this.props.onAddNotes(this.state);
+        onAddNotes({
+          title: title,
+          body: body,
+        });
       }
     });
-  }
+  };
 
-  onTitleChangeHandler(event) {
-    this.setState({
-      title: event.target.value,
-    });
-  }
-
-  onBodyChangeHandler(event) {
-    this.setState({
-      body: event.target.value,
-    });
-  }
-
-  render() {
-    return (
-      <Row>
-        <Col>
-          <Card className="card-height">
-            <Card.Header as="h5" className="p-3">
-              New Note
-            </Card.Header>
-            <Card.Body>
-              <Form onSubmit={this.onSubmitEventHandler}>
-                <Form.Group className="mb-3" controlId="formBasicTitle">
-                  <Form.Label>Title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder={NOTE_TITLE_PLACEHOLDER}
-                    required
-                    onChange={this.onTitleChangeHandler}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicBody">
-                  <Form.Label>Detail</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={5}
-                    placeholder={NOTE_DETAIL_PLACEHOLDER}
-                    required
-                    onChange={this.onBodyChangeHandler}
-                  />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    );
-  }
-}
+  return (
+    <Row>
+      <Col>
+        <Card className="card-height">
+          <Card.Header as="h5" className="p-3">
+            {localizationCard.newNote}
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={onSubmitEventHandler}>
+              <Form.Group className="mb-3" controlId="formBasicTitle">
+                <Form.Label>{localizationInput.title}</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={localizationInput.titlePlaceholder}
+                  required
+                  onChange={setTitle}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicBody">
+                <Form.Label>{localizationInput.detail}</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  placeholder={localizationInput.detailPlaceholder}
+                  required
+                  onChange={setBody}
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                {localizationInput.submit}
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  );
+};
 
 NoteFormComponent.propTypes = {
-  onAddNotes: PropTypes.func.isRequired
-}
+  onAddNotes: PropTypes.func.isRequired,
+};
 
 export default NoteFormComponent;
