@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Badge, Card, Col, Form, Row } from "react-bootstrap";
 import { showFormattedDate } from "../utils/MyCustoms";
 import { getNote } from "../utils/MyData";
 import { useParams } from "react-router-dom";
 import useLocalization from "../hooks/useLocalization";
+import LocalizationContext from "../contexts/LocalizationContext";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -11,6 +12,9 @@ const DetailPage = () => {
   const localizationCard = useLocalization("card");
   const localizationInput = useLocalization("input");
   const localizationSwal = useLocalization("swal");
+
+  const { localization } = useContext(LocalizationContext);
+  const lang = localization === "id" ? "id-ID" : "en-US";
 
   useEffect(() => {
     setNote(getNote(Number(id)));
@@ -63,7 +67,7 @@ const DetailPage = () => {
                   <Form.Control
                     type="text"
                     placeholder={localizationInput.createdAt}
-                    value={showFormattedDate(note.createdAt)}
+                    value={showFormattedDate(note.createdAt, lang)}
                     disabled
                   />
                 </Form.Group>

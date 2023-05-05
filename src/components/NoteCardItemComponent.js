@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
@@ -6,6 +6,7 @@ import { showFormattedDate } from "../utils/MyCustoms";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
+import LocalizationContext from "../contexts/LocalizationContext";
 
 const NoteCardItemComponent = ({
   title,
@@ -18,7 +19,9 @@ const NoteCardItemComponent = ({
   onDelete,
 }) => {
   const navigate = useNavigate();
-  const localization = useLocalization("card");
+  const localizationCard = useLocalization("card");
+  const { localization } = useContext(LocalizationContext);
+  const lang = localization === "id" ? "id-ID" : "en-US";
 
   return (
     <Col lg="3" className="pb-4">
@@ -29,7 +32,7 @@ const NoteCardItemComponent = ({
         <Card.Body>
           <Card.Text>{body}</Card.Text>
           <footer className="blockquote-footer pt-3 mb-0">
-            {showFormattedDate(createdAt)}
+            {showFormattedDate(createdAt, lang)}
           </footer>
         </Card.Body>
         <Card.Footer>
@@ -39,7 +42,7 @@ const NoteCardItemComponent = ({
           >
             <FontAwesomeIcon
               color="cornflowerblue"
-              title={localization.detail}
+              title={localizationCard.detail}
               icon={regular("eye")}
             />
           </Button>
@@ -49,13 +52,15 @@ const NoteCardItemComponent = ({
           >
             <FontAwesomeIcon
               color="red"
-              title={archived ? localization.unArchive : localization.archive}
+              title={
+                archived ? localizationCard.unArchive : localizationCard.archive
+              }
               icon={archived ? solid("heart") : regular("heart")}
             />
           </Button>
           <Button variant="default" onClick={() => onDelete(id)}>
             <FontAwesomeIcon
-              title={localization.delete}
+              title={localizationCard.delete}
               icon={regular("trash-can")}
             />
           </Button>
