@@ -97,13 +97,13 @@ const MyNotesApp = () => {
       <LocalizationContext.Provider value={localizationContextValue}>
         <header>
           <NavBarComponent />
+        </header>
+        <main>
           <JumbotronComponent
             keyword={keyword}
             onKeywordChangeHandler={onKeywordChangeHandler}
           />
           <NavigationComponent notes={filteredNotes} />
-        </header>
-        <main>
           <Container style={{ minHeight: "800px" }}>
             <Routes>
               <Route
