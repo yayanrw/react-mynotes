@@ -23,7 +23,9 @@ const MyNotesApp = () => {
 
   const toggleLocalization = () => {
     setLocalization((prevLocale) => {
-      return prevLocale === "id" ? "en" : "id";
+      let newLocale = prevLocale === "id" ? "en" : "id";
+      localStorage.setItem("localization", newLocale);
+      return newLocale;
     });
   };
 
