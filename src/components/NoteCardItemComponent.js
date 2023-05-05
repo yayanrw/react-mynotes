@@ -49,7 +49,7 @@ const NoteCardItemComponent = ({
           >
             <FontAwesomeIcon
               color="red"
-              title={archived ? localization.unarchive : localization.archive}
+              title={archived ? localization.unArchive : localization.archive}
               icon={archived ? solid("heart") : regular("heart")}
             />
           </Button>
