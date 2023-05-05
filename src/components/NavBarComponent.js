@@ -15,7 +15,7 @@ const NavBarComponent = () => {
         </Navbar.Brand>
         <Nav>
           <Nav.Link onClick={toggleLocalization}>
-            {localization.toUpperCase()}
+            {localization === "id" ? "EN" : "ID"}
           </Nav.Link>
         </Nav>
       </Container>
