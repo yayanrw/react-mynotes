@@ -34,7 +34,7 @@ const DetailPage = () => {
               <Badge bg={note.archived ? "success" : "warning"}>
                 {note.archived
                   ? localizationCard.archive
-                  : localizationCard.unarchive}
+                  : localizationCard.unArchive}
               </Badge>
             </Card.Header>
             <Card.Body>
