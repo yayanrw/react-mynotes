@@ -49,6 +49,7 @@ const input = {
   id: {
     title: "Judul",
     detail: "Detail",
+    createdAt: "Dibuat pada",
     titlePlaceholder: "Ketik judul catatanmu di sini",
     detailPlaceholder: "Ketik detail catatanmu di sini",
     searchPlaceholder: "Cari catatan keren mu...",
@@ -58,6 +59,7 @@ const input = {
   en: {
     title: "Title",
     detail: "Detail",
+    createdAt: "Created At",
     titlePlaceholder: "Type your awesome note title",
     detailPlaceholder: "Type your awesome note detail",
     searchPlaceholder: "Search your awesome notes...",
