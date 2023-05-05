@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { AUTHOR, CLASS_NAME } from "../utils/MyConstants";
+import { AUTHOR } from "../utils/MyConstants";
 import useLocalization from "../hooks/useLocalization";
 
 const FooterComponent = () => {
