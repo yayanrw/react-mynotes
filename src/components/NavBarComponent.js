@@ -5,7 +5,7 @@ import LocalizationContext from "../contexts/LocalizationContext";
 import { EN, ID, LIGHT } from "../utils/MyConstants";
 import ThemeContext from "../contexts/ThemeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const NavBarComponent = () => {
   const localizationApp = useLocalization("app");
