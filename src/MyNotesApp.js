@@ -3,15 +3,16 @@ import NavBarComponent from "./components/NavBarComponent";
 import FooterComponent from "./components/FooterComponent";
 import LocalizationContext from "./contexts/LocalizationContext";
 import BaseNoteComponent from "./components/BaseNoteComponent";
+import { EN, ID } from "./utils/MyConstants";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(
-    localStorage.getItem("localization") || "id"
+    localStorage.getItem("localization") || ID
   );
 
   const toggleLocalization = () => {
     setLocalization((prevLocale) => {
-      let newLocale = prevLocale === "id" ? "en" : "id";
+      let newLocale = prevLocale === ID ? EN : ID;
       localStorage.setItem("localization", newLocale);
       return newLocale;
     });

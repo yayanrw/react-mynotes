@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
+import { EN, ID } from "../utils/MyConstants";
 
 const NavBarComponent = () => {
   const localizationApp = useLocalization("app");
@@ -15,7 +16,7 @@ const NavBarComponent = () => {
         </Navbar.Brand>
         <Nav>
           <Nav.Link onClick={toggleLocalization}>
-            {localization === "id" ? "EN" : "ID"}
+            {localization === ID ? EN : ID}
           </Nav.Link>
         </Nav>
       </Container>
