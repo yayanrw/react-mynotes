@@ -9,7 +9,6 @@ import ArchivePage from "../pages/ArchivePage";
 import DetailPage from "../pages/DetailPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import { addNote, archivedNote, deleteNote, getNotes } from "../utils/MyData";
-import { ARCHIVE, DELETE, INSERT, UNARCHIVE } from "../utils/MyConstants";
 import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
 import useLocalization from "../hooks/useLocalization";
 
@@ -40,7 +39,7 @@ const BaseNoteComponent = () => {
   };
 
   const onDeleteHandler = (id) => {
-    confirmationDialog(DELETE, (confirmed) => {
+    confirmationDialog(localization.deleteDataWarn, localization.deleteIt, localization.areYouSure, (confirmed) => {
       if (confirmed) {
         deleteNote(id);
         swalSuccess(localization.success, localization.deleteSuggest);
@@ -51,7 +50,7 @@ const BaseNoteComponent = () => {
   };
 
   const onArchiveHandler = (id) => {
-    confirmationDialog(ARCHIVE, (confirmed) => {
+    confirmationDialog(localization.archiveDataWarn, localization.archiveIt, localization.areYouSure, (confirmed) => {
       if (confirmed) {
         archivedNote(id, true);
         swalSuccess(localization.success, localization.archiveSuggest);
@@ -62,7 +61,7 @@ const BaseNoteComponent = () => {
   };
 
   const onUnarchiveHandler = (id) => {
-    confirmationDialog(UNARCHIVE, (confirmed) => {
+    confirmationDialog(localization.unArchiveDataWarn, localization.unArchiveIt, localization.areYouSure, (confirmed) => {
       if (confirmed) {
         archivedNote(id, false);
         swalSuccess(localization.success, localization.unArchiveSuggest);

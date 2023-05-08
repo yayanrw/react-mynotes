@@ -4,24 +4,29 @@ import { confirmationDialog } from "../utils/MyCustoms";
 import PropTypes from "prop-types";
 import useInput from "../hooks/useInput";
 import useLocalization from "../hooks/useLocalization";
-import { INSERT } from "../utils/MyConstants";
 
 const NoteFormComponent = ({ onAddNotes }) => {
   const [title, setTitle] = useInput("");
   const [body, setBody] = useInput("");
   const localizationInput = useLocalization("input");
   const localizationCard = useLocalization("card");
+  const localizationSwal = useLocalization("swal");
 
   const onSubmitEventHandler = (event) => {
     event.preventDefault();
-    confirmationDialog(INSERT, (confirmed) => {
-      if (confirmed) {
-        onAddNotes({
-          title: title,
-          body: body,
-        });
+    confirmationDialog(
+      localizationSwal.insertDataWarn,
+      localizationSwal.insertIt,
+      localizationSwal.areYouSure,
+      (confirmed) => {
+        if (confirmed) {
+          onAddNotes({
+            title: title,
+            body: body,
+          });
+        }
       }
-    });
+    );
   };
 
   return (

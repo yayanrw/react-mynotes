@@ -32,40 +32,15 @@ const showFormattedDate = (date, lang) => {
   return new Date(date).toLocaleDateString(lang, options);
 };
 
-const confirmationDialog = (type, callBack) => {
-  let warn_text;
-  let suggestion_text;
-  switch (type) {
-    case INSERT:
-      warn_text = INSERT_DATA_WARN;
-      suggestion_text = INSERT_IT;
-      break;
-    case DELETE:
-      warn_text = DELETE_DATA_WARN;
-      suggestion_text = DELETE_IT;
-      break;
-    case ARCHIVE:
-      warn_text = ARCHIVE_DATA_WARN;
-      suggestion_text = ARCHIVE_IT;
-      break;
-    case UNARCHIVE:
-      warn_text = UNARCHIVE_DATA_WARN;
-      suggestion_text = UNARCHIVE_IT;
-      break;
-    default:
-      warn_text = ERROR_WARN;
-      suggestion_text = TRY_AGAIN;
-      break;
-  }
-
+const confirmationDialog = (warnText, suggestionText, areYouSure, callBack) => {
   Swal.fire({
-    title: ARE_YOU_SURE,
-    text: warn_text,
+    title: areYouSure,
+    text: warnText,
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: suggestion_text,
+    confirmButtonText: suggestionText,
   }).then((result) => {
     if (result.isConfirmed) {
       callBack(true);
