@@ -26,7 +26,7 @@ const NoteCardItemComponent = ({
 
   return (
     <Col lg="3" className="pb-4">
-      <Card className="card-height">
+      <Card className="card-height bg-light text-black">
         <Card.Header as="h6" className="p-3">
           {title}
         </Card.Header>
@@ -61,6 +61,7 @@ const NoteCardItemComponent = ({
           </Button>
           <Button variant="default" onClick={() => onDelete(id)}>
             <FontAwesomeIcon
+              color="orange"
               title={localizationCard.delete}
               icon={regular("trash-can")}
             />

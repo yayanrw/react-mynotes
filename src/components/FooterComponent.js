@@ -6,11 +6,11 @@ import useLocalization from "../hooks/useLocalization";
 const FooterComponent = () => {
   const localization = useLocalization("app");
   return (
-    <Container fluid className="bg-dark px-5 mt-5">
+    <Container fluid className="bg-light text-black px-5 mt-5">
       <Row>
         <Col>
           <Container>
-            <p className="mb-0 text-white pt-5 pb-5">
+            <p className="mb-0 pt-5 pb-5">
               {localization.courseName}
               <span className="float-end">{AUTHOR} @Dicoding 2023</span>
             </p>
