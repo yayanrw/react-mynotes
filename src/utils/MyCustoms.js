@@ -1,26 +1,4 @@
 import Swal from "sweetalert2";
-import {
-  ARCHIVE,
-  ARCHIVE_DATA_WARN,
-  ARCHIVE_IT,
-  ARCHIVE_SUGGEST,
-  ARE_YOU_SURE,
-  DELETE,
-  DELETE_DATA_WARN,
-  DELETE_IT,
-  DELETE_SUGGEST,
-  ERROR_WARN,
-  INSERT,
-  INSERT_DATA_WARN,
-  INSERT_IT,
-  INSERT_SUGGEST,
-  SUCCESS,
-  TRY_AGAIN,
-  UNARCHIVE,
-  UNARCHIVE_DATA_WARN,
-  UNARCHIVE_IT,
-  UNARCHIVE_SUGGEST,
-} from "./MyConstants";
 
 const showFormattedDate = (date, lang) => {
   const options = {
