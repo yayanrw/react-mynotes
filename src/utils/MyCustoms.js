@@ -75,26 +75,8 @@ const confirmationDialog = (type, callBack) => {
   });
 };
 
-const swalSuccess = (type) => {
-  let suggestion_text;
-  switch (type) {
-    case INSERT:
-      suggestion_text = INSERT_SUGGEST;
-      break;
-    case DELETE:
-      suggestion_text = DELETE_SUGGEST;
-      break;
-    case ARCHIVE:
-      suggestion_text = ARCHIVE_SUGGEST;
-      break;
-    case UNARCHIVE:
-      suggestion_text = UNARCHIVE_SUGGEST;
-      break;
-    default:
-      suggestion_text = TRY_AGAIN;
-      break;
-  }
-  Swal.fire(SUCCESS, suggestion_text, "success");
+const swalSuccess = (type, suggestionText) => {
+  Swal.fire(type, suggestionText, "success");
 };
 
 export { showFormattedDate, confirmationDialog, swalSuccess };

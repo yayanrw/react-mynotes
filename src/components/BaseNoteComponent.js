@@ -11,6 +11,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import { addNote, archivedNote, deleteNote, getNotes } from "../utils/MyData";
 import { ARCHIVE, DELETE, INSERT, UNARCHIVE } from "../utils/MyConstants";
 import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
+import useLocalization from "../hooks/useLocalization";
 
 const BaseNoteComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,13 +21,15 @@ const BaseNoteComponent = () => {
     return searchParams.get("keyword") || "";
   });
 
+  const localization = useLocalization("swal");
+
   useEffect(() => {
     setNotes(getNotes());
   }, []);
 
   const onAddNotesHandler = (contact) => {
     addNote(contact);
-    swalSuccess(INSERT);
+    swalSuccess(localization.success, localization.insertSuggest);
 
     setNotes(getNotes());
   };
@@ -40,7 +43,7 @@ const BaseNoteComponent = () => {
     confirmationDialog(DELETE, (confirmed) => {
       if (confirmed) {
         deleteNote(id);
-        swalSuccess(DELETE);
+        swalSuccess(localization.success, localization.deleteSuggest);
 
         setNotes(getNotes());
       }
@@ -51,7 +54,7 @@ const BaseNoteComponent = () => {
     confirmationDialog(ARCHIVE, (confirmed) => {
       if (confirmed) {
         archivedNote(id, true);
-        swalSuccess(ARCHIVE);
+        swalSuccess(localization.success, localization.archiveSuggest);
 
         setNotes(getNotes());
       }
@@ -62,7 +65,7 @@ const BaseNoteComponent = () => {
     confirmationDialog(UNARCHIVE, (confirmed) => {
       if (confirmed) {
         archivedNote(id, false);
-        swalSuccess(UNARCHIVE);
+        swalSuccess(localization.success, localization.unArchiveSuggest);
 
         setNotes(getNotes());
       }
