@@ -3,17 +3,26 @@ import NavBarComponent from "./components/NavBarComponent";
 import FooterComponent from "./components/FooterComponent";
 import LocalizationContext from "./contexts/LocalizationContext";
 import BaseNoteComponent from "./components/BaseNoteComponent";
-import { EN, ID } from "./utils/MyConstants";
+import {
+  DARK,
+  DATA_THEME,
+  EN,
+  ID,
+  LIGHT,
+  LOCALIZATION,
+  THEME,
+} from "./utils/MyConstants";
+import ThemeContext from "./contexts/ThemeContext";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(
-    localStorage.getItem("localization") || ID
+    localStorage.getItem(LOCALIZATION) || ID
   );
 
   const toggleLocalization = () => {
     setLocalization((prevLocale) => {
       let newLocale = prevLocale === ID ? EN : ID;
-      localStorage.setItem("localization", newLocale);
+      localStorage.setItem(LOCALIZATION, newLocale);
       return newLocale;
     });
   };
@@ -25,18 +34,43 @@ const MyNotesApp = () => {
     };
   }, [localization]);
 
+  const [theme, setTheme] = useState(localStorage.getItem(THEME) || LIGHT);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      let newTheme = prevTheme === LIGHT ? DARK : LIGHT;
+      localStorage.setItem(THEME, newTheme);
+
+      if (newTheme === DARK) {
+        document.documentElement.setAttribute(DATA_THEME, DARK);
+      } else {
+        document.documentElement.setAttribute(DATA_THEME, LIGHT);
+      }
+      return newTheme;
+    });
+  };
+
+  const themeContextValue = useMemo(() => {
+    return {
+      theme,
+      toggleTheme,
+    };
+  }, [theme]);
+
   return (
     <>
       <LocalizationContext.Provider value={localizationContextValue}>
-        <header>
-          <NavBarComponent />
-        </header>
-        <main>
-          <BaseNoteComponent />
-        </main>
-        <footer>
-          <FooterComponent />
-        </footer>
+        <ThemeContext.Provider value={themeContextValue}>
+          <header>
+            <NavBarComponent />
+          </header>
+          <main>
+            <BaseNoteComponent />
+          </main>
+          <footer>
+            <FooterComponent />
+          </footer>
+        </ThemeContext.Provider>
       </LocalizationContext.Provider>
     </>
   );
