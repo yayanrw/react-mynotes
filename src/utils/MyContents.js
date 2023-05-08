@@ -4,12 +4,16 @@ const app = {
     appQuote:
       "Membuat catatan tidak hanya tentang menangkap detail, tetapi juga ruang untuk refleksi, kejelasan, dan pertumbuhan pribadi. Ini membantu memproses pemikiran, melacak kemajuan, dan membudayakan rasa syukur, menjadikannya alat yang kuat untuk penemuan diri.",
     courseName: "Membangun Aplikasi Catatan Menggunakan React",
+    applyDarkMode: "Terapkan mode gelap",
+    applyLightMode: "Terapkan mode terang",
   },
   en: {
     appName: "MyAwesomeNote",
     appQuote:
       "Creating a notes isn't just about capturing details, it's a space for reflection, clarity, and personal growth. It helps process thoughts, track progress, and cultivate gratitude, making it a powerful tool for self-discovery.",
     courseName: "Building a Note Application Using React",
+    applyDarkMode: "Apply dark mode",
+    applyLightMode: "Apply night mode",
   },
 };
 
