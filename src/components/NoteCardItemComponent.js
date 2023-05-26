@@ -26,7 +26,7 @@ const NoteCardItemComponent = ({
 
   return (
     <Col lg="3" className="pb-4">
-      <Card className="card-height bg-light text-black">
+      <Card className="card-height">
         <Card.Header as="h6" className="p-3">
           {title}
         </Card.Header>
@@ -56,7 +56,7 @@ const NoteCardItemComponent = ({
               title={
                 archived ? localizationCard.unArchive : localizationCard.archive
               }
-              icon={archived ? solid("heart") : regular("heart")}
+              icon={archived ? solid("square-check") : solid("box-archive")}
             />
           </Button>
           <Button variant="default" onClick={() => onDelete(id)}>
