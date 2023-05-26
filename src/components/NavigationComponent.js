@@ -4,6 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import TabTitleComponent from "./TabTitleComponent";
 import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const NavigationComponent = ({ notes }) => {
   const localization = useLocalization("nav");
@@ -19,7 +21,10 @@ const NavigationComponent = ({ notes }) => {
             eventKey="/add-notes"
             active={location.pathname.startsWith("/add-notes")}
           >
-            <TabTitleComponent title={localization.addNewNote} count={99} />
+            <TabTitleComponent
+              title={localization.addNewNote}
+              icon={<FontAwesomeIcon icon={solid("square-plus")} />}
+            />
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -31,7 +36,7 @@ const NavigationComponent = ({ notes }) => {
           >
             <TabTitleComponent
               title={localization.activeNotes}
-              count={notes.filter((item) => !item.archived).length}
+              icon={<FontAwesomeIcon icon={solid("square-check")} />}
               badgeType="primary"
             />
           </Nav.Link>
@@ -45,7 +50,7 @@ const NavigationComponent = ({ notes }) => {
           >
             <TabTitleComponent
               title={localization.archivedNotes}
-              count={notes.filter((item) => item.archived).length}
+              icon={<FontAwesomeIcon icon={solid("archive")} />}
               badgeType="secondary"
             />
           </Nav.Link>

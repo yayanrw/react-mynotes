@@ -1,15 +1,13 @@
 import React from "react";
 import { Badge } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
-const TabTitleComponent = ({ title, count, badgeType = "success" }) => {
+const TabTitleComponent = ({ title, icon, badgeType = "success" }) => {
   return (
     <React.Fragment>
       {title}{" "}
       <Badge bg={badgeType}>
-        {count === 99 ? <FontAwesomeIcon icon={solid("plus")} /> : count}
+        {icon}
       </Badge>
     </React.Fragment>
   );
@@ -17,7 +15,7 @@ const TabTitleComponent = ({ title, count, badgeType = "success" }) => {
 
 TabTitleComponent.propTypes = {
   title: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired,
+  icon: PropTypes.object.isRequired,
   badgeType: PropTypes.string,
 };
 
