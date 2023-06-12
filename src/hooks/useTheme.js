@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LIGHT, THEME } from "../utils/MyConstants";
 
 const useTheme = () => {
-  const [theme, setTheme] = useState(LIGHT);
+  const [theme, setTheme] = useState(localStorage.getItem(THEME) || LIGHT);
 
   const onThemeChange = (value) => {
     setTheme(value);
