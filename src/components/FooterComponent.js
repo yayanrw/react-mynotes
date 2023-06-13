@@ -6,7 +6,7 @@ import useLocalization from "../hooks/useLocalization";
 const FooterComponent = () => {
   const localization = useLocalization("app");
   return (
-    <Container fluid className="bg-light text-dark px-5">
+    <Container fluid className="my-background px-5">
       <Row>
         <Col>
           <Container>
