@@ -42,7 +42,7 @@ const MyNotesApp = () => {
           <header>
             <NavBarComponent />
           </header>
-          <main className="bg-white">
+          <main className="my-background-lighter">
             <BaseNoteComponent />
           </main>
           <footer>
