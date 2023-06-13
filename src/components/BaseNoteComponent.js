@@ -39,36 +39,51 @@ const BaseNoteComponent = () => {
   };
 
   const onDeleteHandler = (id) => {
-    confirmationDialog(localization.deleteDataWarn, localization.deleteIt, localization.areYouSure, (confirmed) => {
-      if (confirmed) {
-        deleteNote(id);
-        swalSuccess(localization.success, localization.deleteSuggest);
+    confirmationDialog(
+      localization.deleteDataWarn,
+      localization.deleteIt,
+      localization.areYouSure,
+      (confirmed) => {
+        if (confirmed) {
+          deleteNote(id);
+          swalSuccess(localization.success, localization.deleteSuggest);
 
-        setNotes(getNotes());
+          setNotes(getNotes());
+        }
       }
-    });
+    );
   };
 
   const onArchiveHandler = (id) => {
-    confirmationDialog(localization.archiveDataWarn, localization.archiveIt, localization.areYouSure, (confirmed) => {
-      if (confirmed) {
-        archivedNote(id, true);
-        swalSuccess(localization.success, localization.archiveSuggest);
+    confirmationDialog(
+      localization.archiveDataWarn,
+      localization.archiveIt,
+      localization.areYouSure,
+      (confirmed) => {
+        if (confirmed) {
+          archivedNote(id, true);
+          swalSuccess(localization.success, localization.archiveSuggest);
 
-        setNotes(getNotes());
+          setNotes(getNotes());
+        }
       }
-    });
+    );
   };
 
   const onUnarchiveHandler = (id) => {
-    confirmationDialog(localization.unArchiveDataWarn, localization.unArchiveIt, localization.areYouSure, (confirmed) => {
-      if (confirmed) {
-        archivedNote(id, false);
-        swalSuccess(localization.success, localization.unArchiveSuggest);
+    confirmationDialog(
+      localization.unArchiveDataWarn,
+      localization.unArchiveIt,
+      localization.areYouSure,
+      (confirmed) => {
+        if (confirmed) {
+          archivedNote(id, false);
+          swalSuccess(localization.success, localization.unArchiveSuggest);
 
-        setNotes(getNotes());
+          setNotes(getNotes());
+        }
       }
-    });
+    );
   };
 
   const filteredNotes = notes.filter((note) => {
