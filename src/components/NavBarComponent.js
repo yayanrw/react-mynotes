@@ -13,13 +13,13 @@ const NavBarComponent = () => {
   const [theme, toggleTheme] = useTheme();
 
   return (
-    <Navbar id="my-nav-bar" bg="light" variant="light" className="pt-4">
+    <Navbar id="my-nav-bar" className="pt-4 my-background">
       <Container>
         <Navbar.Brand href="#home" style={{ color: "#0DCAF0" }}>
           {localizationApp.appName}
         </Navbar.Brand>
         <Nav>
-          <Nav.Link className="text-dark" onClick={toggleTheme}>
+          <Nav.Link className="my-text" onClick={toggleTheme}>
             {theme === LIGHT_KEY ? (
               <FontAwesomeIcon
                 title={localizationApp.applyDarkMode}
@@ -32,7 +32,7 @@ const NavBarComponent = () => {
               />
             )}
           </Nav.Link>
-          <Nav.Link onClick={toggleLocalization} className="text-dark">
+          <Nav.Link onClick={toggleLocalization} className="my-text">
             {(localization === ID_KEY ? EN_KEY : ID_KEY).toUpperCase()}
           </Nav.Link>
         </Nav>
