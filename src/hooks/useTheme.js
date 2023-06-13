@@ -15,6 +15,9 @@ const useTheme = () => {
   const toggleTheme = () => {
     const newTheme = theme === LIGHT_KEY ? DARK_KEY : LIGHT_KEY;
     setTheme(newTheme);
+
+    const root = window.document.documentElement;
+    root.setAttribute("data-theme", newTheme);
     localStorage.setItem(THEME_KEY, newTheme);
   };
 
