@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
-import { EN_LANG, ID, ID_LANG } from "../utils/MyConstants";
+import { EN_LANG, ID_KEY, ID_LANG } from "../utils/MyConstants";
 
 const NoteCardItemComponent = ({
   title,
@@ -22,7 +22,7 @@ const NoteCardItemComponent = ({
   const navigate = useNavigate();
   const localizationCard = useLocalization("card");
   const { localization } = useContext(LocalizationContext);
-  const lang = localization === ID ? ID_LANG : EN_LANG;
+  const lang = localization === ID_KEY ? ID_LANG : EN_LANG;
 
   return (
     <Col lg="3" className="pb-4">

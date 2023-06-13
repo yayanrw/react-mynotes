@@ -5,7 +5,7 @@ import { getNote } from "../utils/MyData";
 import { useParams } from "react-router-dom";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
-import { EN_LANG, ID, ID_LANG } from "../utils/MyConstants";
+import { EN_LANG, ID_KEY, ID_LANG } from "../utils/MyConstants";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const DetailPage = () => {
   const localizationSwal = useLocalization("swal");
 
   const { localization } = useContext(LocalizationContext);
-  const lang = localization === ID ? ID_LANG : EN_LANG;
+  const lang = localization === ID_KEY ? ID_LANG : EN_LANG;
 
   useEffect(() => {
     setNote(getNote(Number(id)));
