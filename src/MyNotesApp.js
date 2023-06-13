@@ -3,25 +3,19 @@ import NavBarComponent from "./components/NavBarComponent";
 import FooterComponent from "./components/FooterComponent";
 import LocalizationContext from "./contexts/LocalizationContext";
 import BaseNoteComponent from "./components/BaseNoteComponent";
-import {
-  DARK,
-  DATA_THEME,
-  EN,
-  ID,
-  LIGHT,
-  LOCALIZATION,
-  THEME,
-} from "./utils/MyConstants";
+import { EN_KEY, ID_KEY, LOCALIZATION } from "./utils/MyConstants";
 import ThemeContext from "./contexts/ThemeContext";
+import useTheme from "./hooks/useTheme";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(
-    localStorage.getItem(LOCALIZATION) || ID
+    localStorage.getItem(LOCALIZATION) || ID_KEY
   );
+  const [theme, toggleTheme] = useTheme();
 
   const toggleLocalization = () => {
     setLocalization((prevLocale) => {
-      let newLocale = prevLocale === ID ? EN : ID;
+      let newLocale = prevLocale === ID_KEY ? EN_KEY : ID_KEY;
       localStorage.setItem(LOCALIZATION, newLocale);
       return newLocale;
     });
@@ -34,28 +28,12 @@ const MyNotesApp = () => {
     };
   }, [localization]);
 
-  const [theme, setTheme] = useState(localStorage.getItem(THEME) || LIGHT);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => {
-      let newTheme = prevTheme === LIGHT ? DARK : LIGHT;
-      localStorage.setItem(THEME, newTheme);
-
-      if (newTheme === DARK) {
-        document.documentElement.setAttribute(DATA_THEME, DARK);
-      } else {
-        document.documentElement.setAttribute(DATA_THEME, LIGHT);
-      }
-      return newTheme;
-    });
-  };
-
   const themeContextValue = useMemo(() => {
     return {
       theme,
       toggleTheme,
     };
-  }, [theme]);
+  }, [theme, toggleTheme]);
 
   return (
     <>
