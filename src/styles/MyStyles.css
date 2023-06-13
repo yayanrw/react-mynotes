@@ -10,22 +10,25 @@
 }
 
 :root {
+  --main-color: #0dcaf0;
   --font-color: #212529;
   --background-color: #f8f9fa;
-  --main-color: #0dcaf0;
+  --background-color-lighter: #fff;
 }
 
 [data-theme="dark"] {
   --font-color: #f8f9fa;
   --background-color: #212529;
-}
-
-.bg-dark-2 {
-  background-color: #333;
+  --background-color-lighter: #333;
 }
 
 .my-background {
   background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+.my-background-lighter {
+  background-color: var(--background-color-lighter);
   color: var(--font-color);
 }
 
