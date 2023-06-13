@@ -9,16 +9,37 @@
   min-height: 350px;
 }
 
-.bg-dark-2 {
-  background-color: #333;
-}
-
 :root {
   --font-color: #212529;
   --background-color: #f8f9fa;
+  --main-color: #0dcaf0;
 }
 
 [data-theme="dark"] {
   --font-color: #f8f9fa;
   --background-color: #212529;
+}
+
+.bg-dark-2 {
+  background-color: #333;
+}
+
+.my-background {
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+.my-text {
+  color: var(--font-color);
+  transition: color 0.3s ease-in;
+}
+
+.my-text:hover {
+  color: var(--main-color);
+}
+
+.my-text:active,
+.my-text:visited,
+.my-text:focus {
+  color: var(--font-color);
 }
