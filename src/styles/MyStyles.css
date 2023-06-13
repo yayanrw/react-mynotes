@@ -1,8 +1,24 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  transition: background 0.3s ease-in;
 }
 
 .card-height {
   min-height: 350px;
+}
+
+.bg-dark-2 {
+  background-color: #333;
+}
+
+:root {
+  --font-color: #212529;
+  --background-color: #f8f9fa;
+}
+
+[data-theme="dark"] {
+  --font-color: #f8f9fa;
+  --background-color: #212529;
 }

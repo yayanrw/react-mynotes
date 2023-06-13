@@ -11,7 +11,7 @@ const SearchComponent = ({ keyword, keywordChange }) => {
       <Form.Control
         type="search"
         placeholder={localization.searchPlaceholder}
-        className="me-2 py-3 px-5 bg-white text-black"
+        className="me-2 py-3 px-5"
         aria-label={localization.search}
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)}

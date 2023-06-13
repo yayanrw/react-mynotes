@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { DARK_KEY } from "./MyConstants";
 
 const showFormattedDate = (date, lang) => {
   const options = {
@@ -32,4 +33,29 @@ const swalSuccess = (type, suggestionText) => {
   Swal.fire(type, suggestionText, "success");
 };
 
-export { showFormattedDate, confirmationDialog, swalSuccess };
+const changeThemeMode = (prevTheme, changeTo) => {
+  var bgElements = document.getElementsByClassName(`bg-${prevTheme}`);
+  var textElements = document.getElementsByClassName(`text-${changeTo}`);
+
+  Array.from(bgElements).forEach(function (element) {
+    element.classList.replace(`bg-${prevTheme}`, `bg-${changeTo}`);
+    element.style.transition = "background-color 1s";
+  });
+  Array.from(textElements).forEach(function (element) {
+    element.classList.replace(`text-${changeTo}`, `text-${prevTheme}`);
+  });
+
+  if (changeTo === DARK_KEY) {
+    const bgWElements = document.getElementsByClassName("bg-white");
+    Array.from(bgWElements).forEach(function (element) {
+      element.classList.replace(`bg-white`, `bg-dark-2`);
+    });
+  } else {
+    const bgWElements = document.getElementsByClassName("bg-dark-2");
+    Array.from(bgWElements).forEach(function (element) {
+      element.classList.replace(`bg-dark-2`, `bg-white`);
+    });
+  }
+};
+
+export { showFormattedDate, confirmationDialog, swalSuccess, changeThemeMode };

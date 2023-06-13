@@ -32,7 +32,7 @@ const NoteFormComponent = ({ onAddNotes }) => {
   return (
     <Row>
       <Col>
-        <Card className="card-height bg-light text-black">
+        <Card className="card-height bg-light text-dark">
           <Card.Header as="h5" className="p-3">
             {localizationCard.newNote}
           </Card.Header>
@@ -41,7 +41,6 @@ const NoteFormComponent = ({ onAddNotes }) => {
               <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label>{localizationInput.title}</Form.Label>
                 <Form.Control
-                  className="bg-white text-black"
                   type="text"
                   placeholder={localizationInput.titlePlaceholder}
                   required
@@ -51,7 +50,6 @@ const NoteFormComponent = ({ onAddNotes }) => {
               <Form.Group className="mb-3" controlId="formBasicBody">
                 <Form.Label>{localizationInput.detail}</Form.Label>
                 <Form.Control
-                  className="bg-white text-black"
                   as="textarea"
                   rows={5}
                   placeholder={localizationInput.detailPlaceholder}
