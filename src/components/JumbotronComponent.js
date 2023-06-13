@@ -9,7 +9,7 @@ const JumbotronComponent = ({ keyword, onKeywordChangeHandler }) => {
 
   return (
     <Container fluid>
-      <Row className="p-5 bg-light text-center text-dark">
+      <Row className="p-5 my-background text-center">
         <Col className="px-5">
           <Container>
             <h2>{localization.appQuote}</h2>
