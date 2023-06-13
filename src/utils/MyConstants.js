@@ -1,11 +1,11 @@
 export const AUTHOR = "Yayan Rahmat Wijaya";
 export const APP_NAME = "MyAwesomeNote";
-export const ID = "id";
-export const EN = "en";
+export const ID_KEY = "id";
+export const EN_KEY = "en";
 export const ID_LANG = "id-ID";
 export const EN_LANG = "en-US";
-export const DARK = "dark";
-export const LIGHT = "light";
+export const DARK_KEY = "dark";
+export const LIGHT_KEY = "light";
 export const LOCALIZATION = "localization";
-export const THEME = "theme";
+export const THEME_KEY = "theme";
 export const DATA_THEME = "data-theme";
