@@ -6,9 +6,10 @@ const useTheme = () => {
 
   useEffect(() => {
     const currentTheme = localStorage.getItem(THEME_KEY);
-
     if (currentTheme) {
       setTheme(currentTheme);
+      const root = window.document.documentElement;
+      root.setAttribute("data-theme", currentTheme);
     }
   }, []);
 
@@ -16,6 +17,7 @@ const useTheme = () => {
     const newTheme = theme === LIGHT_KEY ? DARK_KEY : LIGHT_KEY;
     setTheme(newTheme);
 
+    console.log(newTheme);
     const root = window.document.documentElement;
     root.setAttribute("data-theme", newTheme);
     localStorage.setItem(THEME_KEY, newTheme);
