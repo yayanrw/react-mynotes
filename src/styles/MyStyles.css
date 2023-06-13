@@ -14,16 +14,30 @@
   --font-color: #212529;
   --background-color: #f8f9fa;
   --background-color-lighter: #fff;
+  --card-header-color: #f0f1f2;
+  --card-body-color: #f8f9fa;
 }
 
 [data-theme="dark"] {
   --font-color: #f8f9fa;
   --background-color: #212529;
   --background-color-lighter: #333;
+  --card-header-color: #202428;
+  --card-body-color: #212529;
 }
 
 .my-background {
   background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+.my-card-header {
+  background-color: var(--card-header-color);
+  color: var(--font-color);
+}
+
+.my-card-body {
+  background-color: var(--card-body-color);
   color: var(--font-color);
 }
 
