@@ -32,11 +32,11 @@ const NoteFormComponent = ({ onAddNotes }) => {
   return (
     <Row>
       <Col>
-        <Card className="card-height bg-light text-dark">
-          <Card.Header as="h5" className="p-3">
+        <Card className="card-height">
+          <Card.Header as="h5" className="p-3 my-card-header">
             {localizationCard.newNote}
           </Card.Header>
-          <Card.Body>
+          <Card.Body className="my-card-body">
             <Form onSubmit={onSubmitEventHandler}>
               <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label>{localizationInput.title}</Form.Label>

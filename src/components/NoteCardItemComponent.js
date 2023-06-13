@@ -27,16 +27,16 @@ const NoteCardItemComponent = ({
   return (
     <Col lg="3" className="pb-4">
       <Card className="card-height">
-        <Card.Header as="h6" className="p-3">
+        <Card.Header as="h6" className="p-3 my-card-header">
           {title}
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="my-card-body">
           <Card.Text>{body}</Card.Text>
           <footer className="blockquote-footer pt-3 mb-0">
             {showFormattedDate(createdAt, lang)}
           </footer>
         </Card.Body>
-        <Card.Footer>
+        <Card.Footer className="my-card-header">
           <Button
             variant="default"
             onClick={() => navigate(`/detail-note/${id}`)}
