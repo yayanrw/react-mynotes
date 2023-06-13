@@ -1,18 +1,24 @@
-import { useState } from "react";
-import { LIGHT, THEME } from "../utils/MyConstants";
+import { useEffect, useState } from "react";
+import { DARK_KEY, LIGHT_KEY, THEME_KEY } from "../utils/MyConstants";
 
 const useTheme = () => {
-  const [theme, setTheme] = useState(localStorage.getItem(THEME) || LIGHT);
+  const [theme, setTheme] = useState(LIGHT_KEY);
 
-  const onThemeChange = (value) => {
-    setTheme(value);
+  useEffect(() => {
+    const currentTheme = localStorage.getItem(THEME_KEY);
 
-    const root = window.document.documentElement;
-    root.setAttribute("data-theme", value);
-    localStorage.setItem(THEME, value);
+    if (currentTheme) {
+      setTheme(currentTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === LIGHT_KEY ? DARK_KEY : LIGHT_KEY;
+    setTheme(newTheme);
+    localStorage.setItem(THEME_KEY, newTheme);
   };
 
-  return [theme, onThemeChange];
+  return [theme, toggleTheme];
 };
 
 export default useTheme;
