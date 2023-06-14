@@ -1,20 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import NavBarComponent from "./components/NavBarComponent";
 import FooterComponent from "./components/FooterComponent";
 import LocalizationContext from "./contexts/LocalizationContext";
-import BaseNoteComponent from "./components/BaseNoteComponent";
 import { EN_KEY, ID_KEY, LOCALIZATION_KEY } from "./utils/constants";
 import ThemeContext from "./contexts/ThemeContext";
 import useTheme from "./hooks/useTheme";
-import { fetchLogin } from "./datasource/auth_datasource";
-import { swalError, swalWarning } from "./utils/swal_helper";
-import { ApplicationException, ServerException } from "./utils/exceptions";
+import LoginPage from "./pages/LoginPage";
+import AuthContext from "./contexts/AuthContext";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(
     localStorage.getItem(LOCALIZATION_KEY) || ID_KEY
   );
   const [theme, toggleTheme] = useTheme();
+  const [auth, setAuth] = useState(null);
 
   const toggleLocalization = () => {
     setLocalization((prevLocale) => {
@@ -38,38 +37,30 @@ const MyNotesApp = () => {
     };
   }, [theme, toggleTheme]);
 
-  useEffect(() => {
-    fetchLogin({
-      email: "example@example.com",
-      password: "password123",
-    })
-      .then(() => {
-        // Handle success
-      })
-      .catch((error) => {
-        if (error instanceof ApplicationException) {
-          swalWarning("Warning", error.message);
-        } else if (error instanceof ServerException) {
-          swalError("Server Error", error.message);
-        } else {
-          swalError("An error occurred", error.message);
-        }
-      });
-  }, []);
+  const authContextValue = useMemo(() => {
+    return {
+      auth,
+      setAuth,
+    };
+  }, [auth]);
 
   return (
     <>
       <LocalizationContext.Provider value={localizationContextValue}>
         <ThemeContext.Provider value={themeContextValue}>
-          <header>
-            <NavBarComponent />
-          </header>
-          <main className="my-background-lighter">
-            <BaseNoteComponent />
-          </main>
-          <footer>
-            <FooterComponent />
-          </footer>
+          <AuthContext.Provider value={authContextValue}>
+            <header>
+              <NavBarComponent />
+            </header>
+            <main className="my-background-lighter">
+              {/* <BaseNoteComponent /> */}
+              <LoginPage />
+              {/* <LoadingSpinner /> */}
+            </main>
+            <footer>
+              <FooterComponent />
+            </footer>
+          </AuthContext.Provider>
         </ThemeContext.Provider>
       </LocalizationContext.Provider>
     </>
