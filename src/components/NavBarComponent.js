@@ -13,7 +13,7 @@ const NavBarComponent = () => {
   const [theme, toggleTheme] = useTheme();
 
   return (
-    <Navbar id="my-nav-bar" className="pt-4 my-background">
+    <Navbar id="my-nav-bar" className="pt-4 pb-4 my-background">
       <Container>
         <Navbar.Brand href="#home" style={{ color: "#0DCAF0" }}>
           {localizationApp.appName}
