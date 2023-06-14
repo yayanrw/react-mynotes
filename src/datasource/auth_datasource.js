@@ -31,6 +31,7 @@ const fetchLoggedUser = async () => {
       method: "GET",
       headers: headersWithToken,
     };
+    
     return fetchApi(url, options);
 }
 
