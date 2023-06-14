@@ -33,6 +33,14 @@ const swalSuccess = (type, suggestionText) => {
   Swal.fire(type, suggestionText, "success");
 };
 
+const swalError = (type, message) => {
+  Swal.fire(type, message, "error");
+};
+
+const swalWarning = (type, message) => {
+  Swal.fire(type, message, "warning");
+};
+
 const changeThemeMode = (prevTheme, changeTo) => {
   var bgElements = document.getElementsByClassName(`bg-${prevTheme}`);
   var textElements = document.getElementsByClassName(`text-${changeTo}`);
@@ -58,4 +66,11 @@ const changeThemeMode = (prevTheme, changeTo) => {
   }
 };
 
-export { showFormattedDate, confirmationDialog, swalSuccess, changeThemeMode };
+export {
+  showFormattedDate,
+  confirmationDialog,
+  swalSuccess,
+  swalWarning,
+  swalError,
+  changeThemeMode,
+};
