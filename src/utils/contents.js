@@ -124,4 +124,4 @@ const pageNotFound = {
   },
 };
 
-export const myContents = { app, nav, card, input, swal, pageNotFound };
+export const contents = { app, nav, card, input, swal, pageNotFound };
