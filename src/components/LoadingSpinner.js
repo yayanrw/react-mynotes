@@ -10,6 +10,7 @@ const LoadingSpinner = () => {
         justifyContent: "center",
         alignItems: "center",
       }}
+      className="my-background-lighter"
     >
       <Spinner animation="border" role="status" variant="info" />
     </Container>
