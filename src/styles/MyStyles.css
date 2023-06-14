@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   transition: background 0.3s ease-in;
+  background-color: var(--background-color);
 }
 
 .card-height {
