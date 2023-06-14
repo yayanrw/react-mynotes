@@ -5,11 +5,9 @@ const LoadingSpinnerComponent = () => {
   return (
     <Container
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        minHeight: "800px",
       }}
-      className="my-background-lighter"
+      className="my-background-lighter pt-5 d-flex align-items-center"
     >
       <Spinner animation="border" role="status" variant="info" />
     </Container>
