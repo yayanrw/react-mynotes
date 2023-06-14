@@ -59,6 +59,13 @@ const input = {
     searchPlaceholder: "Cari catatan keren mu...",
     search: "Cari",
     submit: "Simpan",
+    emailLabel: "Alamat Email",
+    passwordLabel: "Kata Sandi",
+    confirmPassword: "Konfirmasi Kata Sandi",
+    login: "Masuk",
+    dontHaveAccount: "Tidak punya akun?",
+    register: "Daftar",
+    loading: "Memuat",
   },
   en: {
     title: "Title",
@@ -69,6 +76,13 @@ const input = {
     searchPlaceholder: "Search your awesome notes...",
     search: "Search",
     submit: "Submit",
+    emailLabel: "Email address",
+    passwordLabel: "Password",
+    confirmPassword: "Confirm Password",
+    login: "Login",
+    dontHaveAccount: "Don't have an account?",
+    register: "Register",
+    loading: "Loading",
   },
 };
 
@@ -91,6 +105,9 @@ const swal = {
     unArchiveSuggest: "Berhasil Dibuka dari Arsip",
     success: "Berhasil!",
     noNotes: "Ups, tidak ada catatan yang tersedia. Ayo buat catatan!",
+    warning: "Peringatan",
+    serverError: "Server Eror",
+    anErrorOccured: "Telah terjadi kesalahan",
   },
   en: {
     areYouSure: "Are you sure?",
@@ -110,6 +127,9 @@ const swal = {
     unArchiveSuggest: "UnArchived Successfully",
     success: "Success!",
     noNotes: "Whoops there's no awesome notes, lets create it!",
+    warning: "Warning",
+    serverError: "Server Error",
+    anErrorOccured: "An error occurred",
   },
 };
 
