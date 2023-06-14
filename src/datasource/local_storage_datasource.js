@@ -1,4 +1,4 @@
-import { LOCALIZATION_KEY, THEME_KEY, TOKEN_KEY } from "../utils/MyConstants";
+import { LOCALIZATION_KEY, THEME_KEY, TOKEN_KEY } from "../utils/constants";
 
 const getToken = () => {
   return localStorage.getItem(TOKEN_KEY);

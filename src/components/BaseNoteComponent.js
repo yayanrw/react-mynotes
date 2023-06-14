@@ -9,7 +9,7 @@ import ArchivePage from "../pages/ArchivePage";
 import DetailPage from "../pages/DetailPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import { addNote, archivedNote, deleteNote, getNotes } from "../utils/MyData";
-import { confirmationDialog, swalSuccess } from "../utils/MyCustoms";
+import { confirmationDialog, swalSuccess } from "../utils/swal_helper";
 import useLocalization from "../hooks/useLocalization";
 
 const BaseNoteComponent = () => {

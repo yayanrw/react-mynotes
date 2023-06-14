@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Badge, Card, Col, Form, Row } from "react-bootstrap";
-import { showFormattedDate } from "../utils/MyCustoms";
+import { showFormattedDate } from "../utils/date_helper";
 import { getNote } from "../utils/MyData";
 import { useParams } from "react-router-dom";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
-import { EN_LANG, ID_KEY, ID_LANG } from "../utils/MyConstants";
+import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
 
 const DetailPage = () => {
   const { id } = useParams();

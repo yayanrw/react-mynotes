@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { myContents } from "../utils/MyContents";
+import { contents } from "../utils/contents";
 import LocalizationContext from "../contexts/LocalizationContext";
 
 const useLocalization = (type) => {
   const { localization } = useContext(LocalizationContext);
 
-  const text = myContents[type][localization];
+  const text = contents[type][localization];
   return text;
 };
 

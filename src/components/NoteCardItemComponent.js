@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { showFormattedDate } from "../utils/MyCustoms";
+import { showFormattedDate } from "../utils/date_helper";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
-import { EN_LANG, ID_KEY, ID_LANG } from "../utils/MyConstants";
+import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
 
 const NoteCardItemComponent = ({
   title,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-import { confirmationDialog } from "../utils/MyCustoms";
+import { confirmationDialog } from "../utils/swal_helper";
 import PropTypes from "prop-types";
 import useInput from "../hooks/useInput";
 import useLocalization from "../hooks/useLocalization";

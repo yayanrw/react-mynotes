@@ -1,5 +1,9 @@
-import { BASE_URL } from "./MyConstants";
-import { defaultHeaders, fetchApi, headersWithToken } from "../utils/network_helper";
+import { BASE_URL } from "../utils/constants";
+import {
+  defaultHeaders,
+  fetchApi,
+  headersWithToken,
+} from "../utils/network_helper";
 
 const fetchLogin = async ({ email, password }) => {
   const url = `${BASE_URL}/login`;
@@ -26,13 +30,13 @@ const fetchRegister = async ({ name, email, password }) => {
 };
 
 const fetchLoggedUser = async () => {
-    const url = `${BASE_URL}/users/me`;
-    const options = {
-      method: "GET",
-      headers: headersWithToken,
-    };
-    
-    return fetchApi(url, options);
-}
+  const url = `${BASE_URL}/users/me`;
+  const options = {
+    method: "GET",
+    headers: headersWithToken,
+  };
+
+  return fetchApi(url, options);
+};
 
 export { fetchLogin, fetchRegister, fetchLoggedUser };

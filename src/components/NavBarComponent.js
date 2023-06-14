@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
-import { EN_KEY, ID_KEY, LIGHT_KEY } from "../utils/MyConstants";
+import { EN_KEY, ID_KEY, LIGHT_KEY } from "../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import useTheme from "../hooks/useTheme";
