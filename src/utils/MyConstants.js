@@ -9,3 +9,4 @@ export const LIGHT_KEY = "light";
 export const LOCALIZATION = "localization";
 export const THEME_KEY = "theme";
 export const DATA_THEME = "data-theme";
+export const BASE_URL = "https://notes-api.dicoding.dev/v1";
