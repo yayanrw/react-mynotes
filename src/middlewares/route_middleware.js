@@ -3,7 +3,7 @@ import AuthContext from "../contexts/AuthContext";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const RouteMiddleware = ({ children, middleware }) => {
+const RouteMiddleware = ({ child, middleware }) => {
   const { auth } = useContext(AuthContext);
   const location = useLocation();
 
@@ -19,11 +19,11 @@ const RouteMiddleware = ({ children, middleware }) => {
   if (middleware === "public" && auth) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
-  return children;
+  return child;
 };
 
 RouteMiddleware.propTypes = {
-  children: PropTypes.element.isRequired,
+  child: PropTypes.element.isRequired,
   middleware: PropTypes.string.isRequired,
 };
 
