@@ -3,7 +3,7 @@ import { DARK_KEY, LIGHT_KEY } from "../utils/constants";
 import {
   getTheme,
   setTheme as setThemeLocal,
-} from "../datasource/local_storage_datasource";
+} from "../datasources/local_storage_datasource";
 
 const useTheme = () => {
   const [theme, setTheme] = useState(LIGHT_KEY);

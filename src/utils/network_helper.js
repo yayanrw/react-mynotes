@@ -1,5 +1,5 @@
 import { ApplicationException, ServerException } from "./exceptions";
-import { getToken } from "../datasource/local_storage_datasource";
+import { getToken } from "../datasources/local_storage_datasource";
 
 const fetchApi = async (url, options) => {
   const response = await fetch(url, options);
