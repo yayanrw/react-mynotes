@@ -26,7 +26,7 @@ const fetchRegister = async ({ name, email, password }) => {
 };
 
 const fetchLoggedUser = async () => {
-    const url = `${BASE_URL}/user`;
+    const url = `${BASE_URL}/users/me`;
     const options = {
       method: "GET",
       headers: headersWithToken,
