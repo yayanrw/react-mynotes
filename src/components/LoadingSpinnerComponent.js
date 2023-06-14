@@ -5,7 +5,6 @@ const LoadingSpinnerComponent = () => {
   return (
     <Container
       style={{
-        minHeight: "600px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
