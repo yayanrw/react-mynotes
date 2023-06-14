@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Spinner } from "react-bootstrap";
 
-const LoadingSpinner = () => {
+const LoadingSpinnerComponent = () => {
   return (
     <Container
       style={{
@@ -17,4 +17,4 @@ const LoadingSpinner = () => {
   );
 };
 
-export default LoadingSpinner;
+export default LoadingSpinnerComponent;
