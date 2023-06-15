@@ -2,12 +2,11 @@ import React from "react";
 import { Container, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import TabTitleComponent from "./TabTitleComponent";
-import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
-const NavigationComponent = ({ notes }) => {
+const NavigationComponent = () => {
   const localization = useLocalization("nav");
   const location = useLocation();
 
@@ -58,10 +57,6 @@ const NavigationComponent = ({ notes }) => {
       </Nav>
     </Container>
   );
-};
-
-NavigationComponent.propTypes = {
-  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default NavigationComponent;
