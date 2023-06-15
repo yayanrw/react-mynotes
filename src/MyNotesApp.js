@@ -5,8 +5,8 @@ import LocalizationContext from "./contexts/LocalizationContext";
 import { EN_KEY, ID_KEY, LOCALIZATION_KEY } from "./utils/constants";
 import ThemeContext from "./contexts/ThemeContext";
 import useTheme from "./hooks/useTheme";
-import LoginPage from "./pages/LoginPage";
 import AuthContext from "./contexts/AuthContext";
+import Routes from "./routes";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(
@@ -53,9 +53,7 @@ const MyNotesApp = () => {
               <NavBarComponent />
             </header>
             <main className="my-background-lighter">
-              {/* <BaseNoteComponent /> */}
-              <LoginPage />
-              {/* <LoadingSpinner /> */}
+              <Routes />
             </main>
             <footer>
               <FooterComponent />

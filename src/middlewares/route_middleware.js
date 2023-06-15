@@ -17,7 +17,7 @@ const RouteMiddleware = ({ child, middleware }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   if (middleware === "public" && auth) {
-    return <Navigate to="/" state={{ from: location }} replace />;
+    return <Navigate to="/notes/active" state={{ from: location }} replace />;
   }
   return child;
 };

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Button, Container, FloatingLabel, Form } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { APP_NAME } from "../utils/constants";
 import useLocalization from "../hooks/useLocalization";
-import { Link } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import { fetchLogin } from "../datasources/auth_datasource";
 import { ApplicationException, ServerException } from "../utils/exceptions";
@@ -11,15 +11,17 @@ import { setToken } from "../datasources/local_storage_datasource";
 import AuthContext from "../contexts/AuthContext";
 
 const LoginPage = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   const localizationInput = useLocalization("input");
   const localizationSwal = useLocalization("swal");
   const [email, setEmail] = useInput();
   const [password, setPassword] = useInput();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(auth);
     setIsLoading(true);
 
     try {
@@ -30,6 +32,7 @@ const LoginPage = () => {
       const data = response.data;
       setToken(token);
       setAuth(data);
+      navigate("/");
     } catch (error) {
       setIsLoading(false);
       if (error instanceof ApplicationException) {
