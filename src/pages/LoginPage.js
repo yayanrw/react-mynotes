@@ -32,7 +32,7 @@ const LoginPage = () => {
       const data = response.data;
       setToken(token);
       setAuth(data);
-      navigate("/");
+      navigate("/notes/active");
     } catch (error) {
       setIsLoading(false);
       if (error instanceof ApplicationException) {
