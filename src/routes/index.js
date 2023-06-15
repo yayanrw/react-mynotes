@@ -7,6 +7,7 @@ import ActivePage from "../pages/ActivePage";
 import ArchivePage from "../pages/ArchivePage";
 import DetailPage from "../pages/DetailPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import BaseNoteComponent from "../components/BaseNoteComponent";
 
 const Routes = () =>
   useRoutes([
@@ -20,19 +21,39 @@ const Routes = () =>
     },
     {
       path: "/notes/add",
-      element: <RouteMiddleware child={<AddPage />} middleware="auth" />,
+      element: (
+        <RouteMiddleware
+          child={<BaseNoteComponent child={<AddPage />} />}
+          middleware="auth"
+        />
+      ),
     },
     {
       path: "/notes/active",
-      element: <RouteMiddleware child={<ActivePage />} middleware="auth" />,
+      element: (
+        <RouteMiddleware
+          child={<BaseNoteComponent child={<ActivePage />} />}
+          middleware="auth"
+        />
+      ),
     },
     {
       path: "/notes/archive",
-      element: <RouteMiddleware child={<ArchivePage />} middleware="auth" />,
+      element: (
+        <RouteMiddleware
+          child={<BaseNoteComponent child={<ArchivePage />} />}
+          middleware="auth"
+        />
+      ),
     },
     {
       path: "/notes/:id",
-      element: <RouteMiddleware child={<DetailPage />} middleware="auth" />,
+      element: (
+        <RouteMiddleware
+          child={<BaseNoteComponent child={<DetailPage />} />}
+          middleware="auth"
+        />
+      ),
     },
     {
       path: "*",
