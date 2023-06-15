@@ -30,7 +30,7 @@ const LoginPage = () => {
       const token = response.data.accessToken;
       const data = response.data;
       setToken(token);
-      setAuth(data);
+      setAuth(1);
       navigate("/notes/active");
     } catch (error) {
       setIsLoading(false);
