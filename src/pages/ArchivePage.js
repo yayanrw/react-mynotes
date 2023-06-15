@@ -1,24 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NotesListComponent from "../components/NotesListComponent";
-import PropTypes from "prop-types";
+import { fetchArchivedNotes } from "../datasources/note_datasource";
+import useLocalization from "../hooks/useLocalization";
+import { ApplicationException, ServerException } from "../utils/exceptions";
+import { swalError, swalWarning } from "../utils/swal_helper";
+import LoadingSpinnerComponent from "../components/LoadingSpinnerComponent";
 
-const ArchivePage = ({ notes, onArchive, onUnarchive, onDelete }) => {
+const ArchivePage = () => {
+  const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const localizationSwal = useLocalization("swal");
+
+  const callNotesFromApi = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await fetchArchivedNotes();
+
+      setIsLoading(false);
+      setNotes(data);
+    } catch (error) {
+      setIsLoading(false);
+      if (error instanceof ApplicationException) {
+        swalWarning(localizationSwal.warning, error.message);
+      } else if (error instanceof ServerException) {
+        swalError(localizationSwal.serverError, error.message);
+      } else {
+        swalError(localizationSwal.anErrorOccured, error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    callNotesFromApi();
+  }, []);
+
   return (
-    <NotesListComponent
-      notes={notes}
-      showArchive={true}
-      onArchive={onArchive}
-      onUnarchive={onUnarchive}
-      onDelete={onDelete}
-    />
+    <>
+      {isLoading ? (
+        <LoadingSpinnerComponent />
+      ) : (
+        <NotesListComponent notes={notes} />
+      )}
+    </>
   );
-};
-
-ArchivePage.propTypes = {
-  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onArchive: PropTypes.func.isRequired,
-  onUnarchive: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
 
 export default ArchivePage;
