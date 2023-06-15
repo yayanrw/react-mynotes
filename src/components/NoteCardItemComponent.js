@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
@@ -8,21 +8,119 @@ import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
 import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
+import {
+  archiveNote,
+  deleteNote,
+  unArchiveNote,
+} from "../datasources/note_datasource";
+import { ApplicationException, ServerException } from "../utils/exceptions";
+import {
+  confirmationDialog,
+  swalError,
+  swalSuccess,
+  swalWarning,
+} from "../utils/swal_helper";
 
-const NoteCardItemComponent = ({
-  title,
-  body,
-  archived,
-  createdAt,
-  id,
-  onArchive,
-  onUnarchive,
-  onDelete,
-}) => {
+const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
   const navigate = useNavigate();
   const localizationCard = useLocalization("card");
+  const localizationSwal = useLocalization("swal");
   const { localization } = useContext(LocalizationContext);
   const lang = localization === ID_KEY ? ID_LANG : EN_LANG;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const archiveHandler = async (id) => {
+    confirmationDialog(
+      localizationSwal.archiveDataWarn,
+      localizationSwal.archiveIt,
+      localizationSwal.areYouSure,
+      (confirmed) => {
+        if (confirmed) {
+          callArchive(id);
+        }
+      }
+    );
+  };
+
+  const unArchiveHandler = async (id) => {
+    confirmationDialog(
+      localizationSwal.unArchiveDataWarn,
+      localizationSwal.unArchiveIt,
+      localizationSwal.areYouSure,
+      (confirmed) => {
+        if (confirmed) {
+          callUnArchive(id);
+        }
+      }
+    );
+  };
+
+  const deleteHandler = async (id) => {
+    confirmationDialog(
+      localizationSwal.deleteDataWarn,
+      localizationSwal.deleteIt,
+      localizationSwal.areYouSure,
+      (confirmed) => {
+        if (confirmed) {
+          callDelete(id);
+        }
+      }
+    );
+  };
+
+  const callArchive = async (id) => {
+    try {
+      setIsLoading(true);
+      await archiveNote(id);
+      swalSuccess(localizationSwal.success, localizationSwal.archiveSuggest);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      if (error instanceof ApplicationException) {
+        swalWarning(localizationSwal.warning, error.message);
+      } else if (error instanceof ServerException) {
+        swalError(localizationSwal.serverError, error.message);
+      } else {
+        swalError(localizationSwal.anErrorOccured, error.message);
+      }
+    }
+  };
+
+  const callUnArchive = async (id) => {
+    try {
+      setIsLoading(true);
+      await unArchiveNote(id);
+      swalSuccess(localizationSwal.success, localizationSwal.unArchiveSuggest);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      if (error instanceof ApplicationException) {
+        swalWarning(localizationSwal.warning, error.message);
+      } else if (error instanceof ServerException) {
+        swalError(localizationSwal.serverError, error.message);
+      } else {
+        swalError(localizationSwal.anErrorOccured, error.message);
+      }
+    }
+  };
+
+  const callDelete = async (id) => {
+    try {
+      setIsLoading(true);
+      await deleteNote(id);
+      swalSuccess(localizationSwal.success, localizationSwal.deleteSuggest);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      if (error instanceof ApplicationException) {
+        swalWarning(localizationSwal.warning, error.message);
+      } else if (error instanceof ServerException) {
+        swalError(localizationSwal.serverError, error.message);
+      } else {
+        swalError(localizationSwal.anErrorOccured, error.message);
+      }
+    }
+  };
 
   return (
     <Col lg="3" className="pb-4">
@@ -39,7 +137,8 @@ const NoteCardItemComponent = ({
         <Card.Footer className="my-card-header">
           <Button
             variant="default"
-            onClick={() => navigate(`/detail-note/${id}`)}
+            disabled={isLoading}
+            onClick={() => navigate(`/notes/${id}`)}
           >
             <FontAwesomeIcon
               color="cornflowerblue"
@@ -49,7 +148,10 @@ const NoteCardItemComponent = ({
           </Button>
           <Button
             variant="default"
-            onClick={archived ? () => onUnarchive(id) : () => onArchive(id)}
+            disabled={isLoading}
+            onClick={
+              archived ? () => unArchiveHandler(id) : () => archiveHandler(id)
+            }
           >
             <FontAwesomeIcon
               color="red"
@@ -59,7 +161,11 @@ const NoteCardItemComponent = ({
               icon={archived ? solid("square-check") : solid("box-archive")}
             />
           </Button>
-          <Button variant="default" onClick={() => onDelete(id)}>
+          <Button
+            variant="default"
+            disabled={isLoading}
+            onClick={() => deleteHandler(id)}
+          >
             <FontAwesomeIcon
               color="orange"
               title={localizationCard.delete}
@@ -77,10 +183,7 @@ NoteCardItemComponent.propTypes = {
   body: PropTypes.string.isRequired,
   archived: PropTypes.bool.isRequired,
   createdAt: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  onArchive: PropTypes.func.isRequired,
-  onUnarchive: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default NoteCardItemComponent;
