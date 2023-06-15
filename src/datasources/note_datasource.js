@@ -11,7 +11,7 @@ const insertNote = ({ title, body }) => {
   return fetchApi(url, options);
 };
 
-const getActiveNotes = () => {
+const fetchActiveNotes = () => {
   const url = `${BASE_URL}/notes`;
   const options = {
     method: "GET",
@@ -20,7 +20,7 @@ const getActiveNotes = () => {
   return fetchApi(url, options);
 };
 
-const getArchivedNotes = () => {
+const fetchArchivedNotes = () => {
   const url = `${BASE_URL}/notes/archived`;
   const options = {
     method: "GET",
@@ -29,7 +29,7 @@ const getArchivedNotes = () => {
   return fetchApi(url, options);
 };
 
-const getNote = (id) => {
+const fetchNote = (id) => {
   const url = `${BASE_URL}/notes/${id}`;
   const options = {
     method: "GET",
@@ -67,9 +67,9 @@ const deleteNote = (id) => {
 
 export {
   insertNote,
-  getActiveNotes,
-  getArchivedNotes,
-  getNote,
+  fetchActiveNotes,
+  fetchArchivedNotes,
+  fetchNote,
   archiveNote,
   unArchiveNote,
   deleteNote,
