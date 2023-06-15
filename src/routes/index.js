@@ -12,6 +12,10 @@ import BaseNoteComponent from "../components/BaseNoteComponent";
 const Routes = () =>
   useRoutes([
     {
+      path: "/",
+      element: <RouteMiddleware middleware="auth" />,
+    },
+    {
       path: "/login",
       element: <RouteMiddleware child={<LoginPage />} middleware="public" />,
     },
