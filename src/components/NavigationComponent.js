@@ -12,13 +12,18 @@ const NavigationComponent = () => {
 
   return (
     <Container>
-      <Nav justify variant="tabs" defaultActiveKey="/" className="mb-5 mt-5">
+      <Nav
+        justify
+        variant="tabs"
+        defaultActiveKey="/notes/active"
+        className="mb-5 mt-5"
+      >
         <Nav.Item>
           <Nav.Link
             as={Link}
-            to="/add-notes"
-            eventKey="/add-notes"
-            active={location.pathname.startsWith("/add-notes")}
+            to="/notes/add"
+            eventKey="/notes/add"
+            active={location.pathname.startsWith("/notes/add")}
           >
             <TabTitleComponent
               title={localization.addNewNote}
@@ -29,9 +34,9 @@ const NavigationComponent = () => {
         <Nav.Item>
           <Nav.Link
             as={Link}
-            to="/"
-            eventKey="/"
-            active={location.pathname === "/"}
+            to="/notes/active"
+            eventKey="/notes/active"
+            active={location.pathname === "/notes/active"}
           >
             <TabTitleComponent
               title={localization.activeNotes}
@@ -43,9 +48,9 @@ const NavigationComponent = () => {
         <Nav.Item>
           <Nav.Link
             as={Link}
-            to="/archived-notes"
-            eventKey="/archived-notes"
-            active={location.pathname.startsWith("/archived-notes")}
+            to="/notes/archive"
+            eventKey="/notes/archive"
+            active={location.pathname.startsWith("/notes/archive")}
           >
             <TabTitleComponent
               title={localization.archivedNotes}
