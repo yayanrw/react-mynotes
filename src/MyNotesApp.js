@@ -71,7 +71,7 @@ const MyNotesApp = () => {
   };
 
   useEffect(() => {
-    if (getToken() !== undefined) {
+    if (getToken() !== null) {
       callLoggedUser();
     }
   }, [getToken()]);
