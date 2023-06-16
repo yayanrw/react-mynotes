@@ -7,7 +7,7 @@ const LoadingSpinnerComponent = () => {
       style={{
         minHeight: "800px",
       }}
-      className="text-center"
+      className="text-center pt-5"
     >
       <Spinner animation="border" role="status" variant="info" />
     </Col>
