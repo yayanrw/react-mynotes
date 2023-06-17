@@ -74,7 +74,7 @@ const MyNotesApp = () => {
     if (getToken() !== null) {
       callLoggedUser();
     }
-  }, [getToken()]);
+  }, []);
 
   return (
     <>
