@@ -3,15 +3,15 @@ import { Button, Container, FloatingLabel, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { APP_NAME } from "../utils/constants";
 import useLocalization from "../hooks/useLocalization";
-import useLogin from "../hooks/useLogin";
+import useAuth from "../hooks/useAuth";
 
 const LoginPage = () => {
   const localizationInput = useLocalization("input");
-  const { setEmail, setPassword, handleSubmit, isLoading } = useLogin();
+  const { setEmail, setPassword, handleLogin, isLoading } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleSubmit();
+    handleLogin();
   };
 
   return (

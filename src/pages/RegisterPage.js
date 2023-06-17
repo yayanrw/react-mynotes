@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Container, FloatingLabel, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useLocalization from "../hooks/useLocalization";
-import useRegister from "../hooks/useRegister";
+import useAuth from "../hooks/useAuth";
 import { confirmationDialog } from "../utils/swal_helper";
 
 const RegisterPage = () => {
@@ -16,8 +16,8 @@ const RegisterPage = () => {
     setEmail,
     setPassword,
     isLoading,
-    handleSubmit,
-  } = useRegister();
+    handleRegister,
+  } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const RegisterPage = () => {
       localizationSwal.areYouSure,
       (confirmed) => {
         if (confirmed) {
-          handleSubmit();
+          handleRegister();
         }
       }
     );
