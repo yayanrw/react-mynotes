@@ -20,9 +20,11 @@ const defaultHeaders = {
   "Content-Type": "application/json",
 };
 
-const headersWithToken = {
-  ...defaultHeaders,
-  Authorization: `Bearer ${getToken()}`,
+const headersWithToken = () => {
+  return {
+    ...defaultHeaders,
+    Authorization: `Bearer ${getToken()}`,
+  };
 };
 
 export { fetchApi, defaultHeaders, headersWithToken };
