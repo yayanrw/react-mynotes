@@ -17,8 +17,9 @@ const useLogin = () => {
     setIsLoading(true);
 
     try {
-      const { data } = await fetchLogin({ email: email, password: password });
-      setToken(data.accessToken);
+      const { data } = await fetchLogin({ email, password });
+      const { accessToken } = data;
+      setToken(accessToken);
       setAuth(1);
       setIsLoading(false);
     } catch (error) {
