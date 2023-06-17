@@ -14,11 +14,9 @@ const useLogin = () => {
   const { handleApiError } = useErrorNetworkHandler();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-
+  const handleSubmit = async () => {    
     try {
+      setIsLoading(true);
       const { data } = await fetchLogin({ email, password });
       const { accessToken } = data;
       setToken(accessToken);
@@ -31,7 +29,7 @@ const useLogin = () => {
     }
   };
 
-  return { email, setEmail, password, setPassword, isLoading, handleSubmit };
+  return { setEmail, setPassword, isLoading, handleSubmit };
 };
 
 export default useLogin;
