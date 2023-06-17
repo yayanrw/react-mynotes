@@ -1,47 +1,17 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Button, Container, FloatingLabel, Form } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { APP_NAME } from "../utils/constants";
 import useLocalization from "../hooks/useLocalization";
-import useInput from "../hooks/useInput";
-import { fetchLogin } from "../datasources/auth_datasource";
-import { ApplicationException, ServerException } from "../utils/exceptions";
-import { swalError, swalWarning } from "../utils/swal_helper";
-import { setToken } from "../datasources/local_storage_datasource";
-import AuthContext from "../contexts/AuthContext";
+import useLogin from "../hooks/useLogin";
 
 const LoginPage = () => {
-  const { auth, setAuth } = useContext(AuthContext);
   const localizationInput = useLocalization("input");
-  const localizationSwal = useLocalization("swal");
-  const [email, setEmail] = useInput();
-  const [password, setPassword] = useInput();
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const { setEmail, setPassword, handleSubmit, isLoading } = useLogin();
 
-  const handleSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      const response = await fetchLogin({ email: email, password: password });
-
-      setIsLoading(false);
-      const token = response.data.accessToken;
-      const data = response.data;
-      setToken(token);
-      setAuth(1);
-      navigate("/notes/active");
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof ApplicationException) {
-        swalWarning(localizationSwal.warning, error.message);
-      } else if (error instanceof ServerException) {
-        swalError(localizationSwal.serverError, error.message);
-      } else {
-        swalError(localizationSwal.anErrorOccured, error.message);
-      }
-    }
+    handleSubmit();
   };
 
   return (
@@ -53,7 +23,7 @@ const LoginPage = () => {
     >
       <Container>
         <h1 className="pb-5 text-center">{APP_NAME}</h1>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={onSubmit}>
           <FloatingLabel
             controlId="floatingInput"
             label={localizationInput.emailLabel}
@@ -61,7 +31,7 @@ const LoginPage = () => {
           >
             <Form.Control
               type="email"
-              onChange={setEmail}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder={localizationInput.emailLabel}
             />
           </FloatingLabel>
@@ -71,7 +41,7 @@ const LoginPage = () => {
           >
             <Form.Control
               type="password"
-              onChange={setPassword}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder={localizationInput.passwordLabel}
             />
           </FloatingLabel>
