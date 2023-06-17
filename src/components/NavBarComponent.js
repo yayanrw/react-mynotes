@@ -7,28 +7,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import useTheme from "../hooks/useTheme";
 import AuthContext from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { removeToken } from "../datasources/local_storage_datasource";
 import { confirmationDialog } from "../utils/swal_helper";
+import useAuth from "../hooks/useAuth";
 
 const NavBarComponent = () => {
+  const { handleLogout } = useAuth();
+
   const localizationApp = useLocalization("app");
   const localizationSwal = useLocalization("swal");
   const { localization, toggleLocalization } = useContext(LocalizationContext);
   const [theme, toggleTheme] = useTheme();
-  const { auth, setAuth } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
 
-  const handleLogout = async () => {
+  const onLogout = async () => {
     confirmationDialog(
       localizationSwal.logOutWarn,
       localizationSwal.logOutIt,
       localizationSwal.areYouSure,
       (confirmed) => {
         if (confirmed) {
-          removeToken();
-          setAuth(null);
-          navigate("/login");
+          handleLogout();
         }
       }
     );
@@ -58,7 +56,7 @@ const NavBarComponent = () => {
             {(localization === ID_KEY ? EN_KEY : ID_KEY).toUpperCase()}
           </Nav.Link>
           {auth ? (
-            <Nav.Link onClick={handleLogout} className="my-text">
+            <Nav.Link onClick={onLogout} className="my-text">
               <FontAwesomeIcon
                 title={localizationSwal.logOutIt}
                 icon={solid("right-from-bracket")}

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { fetchLogin, fetchRegister } from "../datasources/auth_datasource";
 import AuthContext from "../contexts/AuthContext";
 import useErrorNetworkHandler from "./useErrorNetworkHandler";
-import { setToken } from "../datasources/local_storage_datasource";
+import { removeToken, setToken } from "../datasources/local_storage_datasource";
 import { useNavigate } from "react-router-dom";
 import { swalSuccess } from "../utils/swal_helper";
 import useLocalization from "./useLocalization";
@@ -21,9 +21,8 @@ const useAuth = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
       const { data } = await fetchLogin({ email, password });
       const { accessToken } = data;
       setToken(accessToken);
@@ -48,6 +47,12 @@ const useAuth = () => {
     }
   };
 
+  const handleLogout = () => {
+    removeToken();
+    setAuth(null);
+    navigate("/login");
+  };
+
   const resetState = () => {
     setName("");
     setEmail("");
@@ -68,6 +73,7 @@ const useAuth = () => {
     isPasswordSame,
     handleLogin,
     handleRegister,
+    handleLogout,
   };
 };
 
