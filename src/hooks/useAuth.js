@@ -41,6 +41,7 @@ const useAuth = () => {
       await fetchRegister({ name: name, email: email, password: password });
       resetState();
       swalSuccess(localizationSwal.success, localizationSwal.registerSuggest);
+      navigate("/login");
     } catch (error) {
       setIsLoading(false);
       handleApiError(error);
