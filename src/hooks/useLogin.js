@@ -14,9 +14,10 @@ const useLogin = () => {
   const { handleApiError } = useErrorNetworkHandler();
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {    
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
       const { data } = await fetchLogin({ email, password });
       const { accessToken } = data;
       setToken(accessToken);
