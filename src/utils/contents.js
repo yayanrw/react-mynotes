@@ -68,6 +68,11 @@ const input = {
     haveAnAccount: "Punya akun?",
     register: "Daftar",
     loading: "Memuat...",
+    required: "Wajib diisi",
+    minLength: "Panjang minimum adalah",
+    maxLength: "Panjang maksimal adalah",
+    invalidFormat: "Format input tidak valid",
+    invalidEmailFormat: "Format email tidak valid",
   },
   en: {
     title: "Title",
@@ -87,6 +92,11 @@ const input = {
     haveAnAccount: "Have an account?",
     register: "Register",
     loading: "Loading...",
+    required: "Field is required",
+    minLength: "Minimum length is",
+    maxLength: "Maximal length is",
+    invalidFormat: "Invalid input format",
+    invalidEmailFormat: "Email format is invalid",
   },
 };
 
