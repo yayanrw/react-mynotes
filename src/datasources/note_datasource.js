@@ -5,7 +5,7 @@ const insertNote = ({ title, body }) => {
   const url = `${BASE_URL}/notes`;
   const options = {
     method: "POST",
-    headers: headersWithToken,
+    headers: headersWithToken(),
     body: JSON.stringify({ title, body }),
   };
   return fetchApi(url, options);
@@ -15,8 +15,9 @@ const fetchActiveNotes = () => {
   const url = `${BASE_URL}/notes`;
   const options = {
     method: "GET",
-    headers: headersWithToken,
+    headers: headersWithToken(),
   };
+  console.log(options);
   return fetchApi(url, options);
 };
 
@@ -24,7 +25,7 @@ const fetchArchivedNotes = () => {
   const url = `${BASE_URL}/notes/archived`;
   const options = {
     method: "GET",
-    headers: headersWithToken,
+    headers: headersWithToken(),
   };
   return fetchApi(url, options);
 };
@@ -33,7 +34,7 @@ const fetchNote = (id) => {
   const url = `${BASE_URL}/notes/${id}`;
   const options = {
     method: "GET",
-    headers: headersWithToken,
+    headers: headersWithToken(),
   };
   return fetchApi(url, options);
 };
@@ -42,7 +43,7 @@ const archiveNote = (id) => {
   const url = `${BASE_URL}/notes/${id}/archive`;
   const options = {
     method: "POST",
-    headers: headersWithToken,
+    headers: headersWithToken(),
   };
   return fetchApi(url, options);
 };
@@ -51,7 +52,7 @@ const unArchiveNote = (id) => {
   const url = `${BASE_URL}/notes/${id}/unarchive`;
   const options = {
     method: "POST",
-    headers: headersWithToken,
+    headers: headersWithToken(),
   };
   return fetchApi(url, options);
 };
@@ -60,7 +61,7 @@ const deleteNote = (id) => {
   const url = `${BASE_URL}/notes/${id}`;
   const options = {
     method: "DELETE",
-    headers: headersWithToken,
+    headers: headersWithToken(),
   };
   return fetchApi(url, options);
 };

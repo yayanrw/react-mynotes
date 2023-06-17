@@ -23,7 +23,7 @@ const RouteMiddleware = ({ child, middleware }) => {
 };
 
 RouteMiddleware.propTypes = {
-  child: PropTypes.element.isRequired,
+  child: PropTypes.element,
   middleware: PropTypes.string.isRequired,
 };
 

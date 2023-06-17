@@ -33,7 +33,7 @@ const fetchLoggedUser = async () => {
   const url = `${BASE_URL}/users/me`;
   const options = {
     method: "GET",
-    headers: headersWithToken,
+    headers: headersWithToken(),
   };
 
   return fetchApi(url, options);
