@@ -123,7 +123,7 @@ const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
   };
 
   return (
-    <Col lg="3" className="pb-4">
+    <Col xl="3" lg="4" md="6" sm="12" className="pb-4">
       <Card className="card-height">
         <Card.Header as="h6" className="p-3 my-card-header">
           {title}
