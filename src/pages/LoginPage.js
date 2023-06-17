@@ -4,14 +4,27 @@ import { Link } from "react-router-dom";
 import { APP_NAME } from "../utils/constants";
 import useLocalization from "../hooks/useLocalization";
 import useAuth from "../hooks/useAuth";
+import useForm from "../hooks/useForm";
 
 const LoginPage = () => {
   const localizationInput = useLocalization("input");
+
+  const [emailValue, emailError, emailValidate] = useForm("", {
+    required: true,
+    type: "email",
+  });
+  const [passwordValue, passwordError, passwordValidate] = useForm("", {
+    required: true,
+    minLength: 8,
+  });
   const { setEmail, setPassword, handleLogin, isLoading } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleLogin();
+
+    if (emailError === "" && passwordError === "") {
+      handleLogin();
+    }
   };
 
   return (
@@ -31,9 +44,17 @@ const LoginPage = () => {
           >
             <Form.Control
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                emailValidate(e.target.value);
+                setEmail(e.target.value);
+              }}
               placeholder={localizationInput.emailLabel}
+              isValid={emailError === "" && emailValue !== ""}
+              isInvalid={emailError !== ""}
             />
+            <Form.Control.Feedback type="invalid">
+              {emailError}
+            </Form.Control.Feedback>
           </FloatingLabel>
           <FloatingLabel
             controlId="floatingPassword"
@@ -41,9 +62,17 @@ const LoginPage = () => {
           >
             <Form.Control
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                passwordValidate(e.target.value);
+                setPassword(e.target.value);
+              }}
               placeholder={localizationInput.passwordLabel}
+              isValid={passwordError === "" && passwordValue !== ""}
+              isInvalid={passwordError !== ""}
             />
+            <Form.Control.Feedback type="invalid">
+              {passwordError}
+            </Form.Control.Feedback>
           </FloatingLabel>
           <div className="d-grid gap-2 pt-4 pb-2">
             <Button
