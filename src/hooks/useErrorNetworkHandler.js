@@ -18,10 +18,10 @@ const useErrorNetworkHandler = () => {
     setError(error);
   };
 
-  return {
+  return [
     error,
     handleApiError,
-  };
+  ];
 };
 
 export default useErrorNetworkHandler;
