@@ -17,7 +17,6 @@ const fetchActiveNotes = () => {
     method: "GET",
     headers: headersWithToken(),
   };
-  console.log(options);
   return fetchApi(url, options);
 };
 
