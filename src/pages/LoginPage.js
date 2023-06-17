@@ -8,7 +8,6 @@ import useForm from "../hooks/useForm";
 
 const LoginPage = () => {
   const localizationInput = useLocalization("input");
-
   const [emailValue, emailError, emailValidate] = useForm("", {
     required: true,
     type: "email",
@@ -22,8 +21,16 @@ const LoginPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (emailError === "" && passwordError === "") {
+    if (
+      emailValue !== "" &&
+      emailError === "" &&
+      passwordValue !== "" &&
+      passwordError === ""
+    ) {
       handleLogin();
+    } else {
+      emailValidate(emailValue);
+      passwordValidate(passwordValue);
     }
   };
 
@@ -36,7 +43,7 @@ const LoginPage = () => {
     >
       <Container>
         <h1 className="pb-5 text-center">{APP_NAME}</h1>
-        <Form onSubmit={onSubmit}>
+        <Form noValidate onSubmit={onSubmit}>
           <FloatingLabel
             controlId="floatingInput"
             label={localizationInput.emailLabel}
@@ -51,6 +58,7 @@ const LoginPage = () => {
               placeholder={localizationInput.emailLabel}
               isValid={emailError === "" && emailValue !== ""}
               isInvalid={emailError !== ""}
+              required
             />
             <Form.Control.Feedback type="invalid">
               {emailError}
@@ -69,6 +77,7 @@ const LoginPage = () => {
               placeholder={localizationInput.passwordLabel}
               isValid={passwordError === "" && passwordValue !== ""}
               isInvalid={passwordError !== ""}
+              required
             />
             <Form.Control.Feedback type="invalid">
               {passwordError}
