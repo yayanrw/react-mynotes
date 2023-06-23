@@ -16,10 +16,9 @@ const DetailPage = () => {
 
   const { handleGetNote, note, isLoading } = useNotes();
 
-  setLang(getLocalization());
-
   useEffect(() => {
     handleGetNote(id);
+    setLang(getLocalization());
   }, [id]);
 
   return (
