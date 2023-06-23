@@ -63,21 +63,6 @@ const useNotes = () => {
     }
   };
 
-  const handleInsertNote = async () => {
-    try {
-      setIsLoading(true);
-      await insertNote({
-        title: title,
-        body: body,
-      });
-      resetState();
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      handleApiError(error);
-    }
-  };
-
   const handleGetNote = async () => {
     try {
       setIsLoading(true);
@@ -96,6 +81,22 @@ const useNotes = () => {
       await archiveNote(id);
       setIsLoading(false);
       swalSuccess(localizationSwal.success, localizationSwal.archiveSuggest);
+    } catch (error) {
+      setIsLoading(false);
+      handleApiError(error);
+    }
+  };
+
+  const handleInsertNote = async () => {
+    try {
+      setIsLoading(true);
+      await insertNote({
+        title: title,
+        body: body,
+      });
+      resetState();
+      setIsLoading(false);
+      swalSuccess(localizationSwal.success, localizationSwal.insertSuggest);
     } catch (error) {
       setIsLoading(false);
       handleApiError(error);
@@ -137,6 +138,9 @@ const useNotes = () => {
     notes,
     filteredNotes,
     note,
+    id,
+    title,
+    body,
     setId,
     setTitle,
     setBody,
