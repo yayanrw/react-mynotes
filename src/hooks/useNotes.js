@@ -18,7 +18,6 @@ const useNotes = () => {
   const [filteredNotes, setFilteredNotes] = useState([]);
   const [note, setNote] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -29,14 +28,16 @@ const useNotes = () => {
   const localizationSwal = useLocalization("swal");
 
   useEffect(() => {
-    if (searchParams.get("keyword") === null) return setFilteredNotes(notes);
-
-    const filter = notes.filter((note) =>
-      note.title
-        .toLowerCase()
-        .includes(searchParams.get("keyword")?.toLowerCase())
-    );
-    setFilteredNotes(filter);
+    if (searchParams.get("keyword") === null) {
+      setFilteredNotes(notes);
+    } else {
+      const filter = notes.filter((note) =>
+        note.title
+          .toLowerCase()
+          .includes(searchParams.get("keyword")?.toLowerCase())
+      );
+      setFilteredNotes(filter);
+    }
   }, [searchParams, notes]);
 
   const handleGetActiveNotes = async () => {
@@ -63,24 +64,12 @@ const useNotes = () => {
     }
   };
 
-  const handleGetNote = async () => {
+  const handleGetNote = async (id) => {
     try {
       setIsLoading(true);
       const { data } = await fetchNote(id);
       setNote(data);
       setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      handleApiError(error);
-    }
-  };
-
-  const handleArchiveNote = async () => {
-    try {
-      setIsLoading(true);
-      await archiveNote(id);
-      setIsLoading(false);
-      swalSuccess(localizationSwal.success, localizationSwal.archiveSuggest);
     } catch (error) {
       setIsLoading(false);
       handleApiError(error);
@@ -103,10 +92,24 @@ const useNotes = () => {
     }
   };
 
-  const handleUnArchiveNote = async () => {
+  const handleArchiveNote = async (id) => {
+    try {
+      setIsLoading(true);
+      await archiveNote(id);
+      resetState();
+      setIsLoading(false);
+      swalSuccess(localizationSwal.success, localizationSwal.archiveSuggest);
+    } catch (error) {
+      setIsLoading(false);
+      handleApiError(error);
+    }
+  };
+
+  const handleUnArchiveNote = async (id) => {
     try {
       setIsLoading(true);
       await unArchiveNote(id);
+      resetState();
       setIsLoading(false);
       swalSuccess(localizationSwal.success, localizationSwal.unArchiveSuggest);
     } catch (error) {
@@ -115,10 +118,11 @@ const useNotes = () => {
     }
   };
 
-  const handleDeleteNote = async () => {
+  const handleDeleteNote = async (id) => {
     try {
       setIsLoading(true);
       await deleteNote(id);
+      resetState();
       setIsLoading(false);
       swalSuccess(localizationSwal.success, localizationSwal.deleteSuggest);
     } catch (error) {
@@ -128,7 +132,6 @@ const useNotes = () => {
   };
 
   const resetState = () => {
-    setId("");
     setTitle("");
     setBody("");
   };
@@ -138,10 +141,8 @@ const useNotes = () => {
     notes,
     filteredNotes,
     note,
-    id,
     title,
     body,
-    setId,
     setTitle,
     setBody,
     handleGetActiveNotes,
