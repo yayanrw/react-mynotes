@@ -9,11 +9,9 @@ const FooterComponent = () => {
     <Container fluid className="my-background px-5">
       <Row>
         <Col>
-          <Container>
-            <p className="mb-0 pt-5 pb-5">
-              {localization.courseName}
-              <span className="float-end">{AUTHOR} @Dicoding 2023</span>
-            </p>
+          <Container className="d-flex flex-md-row flex-column justify-content-between align-items-center pt-5 pb-5">
+            <span className="py-2">{localization.courseName}</span>
+            <span className="py-2">{AUTHOR} @Dicoding 2023</span>
           </Container>
         </Col>
       </Row>
