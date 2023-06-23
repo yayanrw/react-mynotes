@@ -1,23 +1,16 @@
-import React, { useState } from "react";
-import useInput from "../hooks/useInput";
+import React from "react";
 import useLocalization from "../hooks/useLocalization";
-import {
-  confirmationDialog,
-  swalError,
-  swalSuccess,
-  swalWarning,
-} from "../utils/swal_helper";
+import { confirmationDialog } from "../utils/swal_helper";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-import { insertNote } from "../datasources/note_datasource";
-import { ApplicationException, ServerException } from "../utils/exceptions";
+import useNotes from "../hooks/useNotes";
 
 const AddPage = () => {
-  const [title, setTitle] = useInput("");
-  const [body, setBody] = useInput("");
-  const [isLoading, setIsLoading] = useState(false);
   const localizationInput = useLocalization("input");
   const localizationCard = useLocalization("card");
   const localizationSwal = useLocalization("swal");
+
+  const { isLoading, handleInsertNote, setTitle, setBody, title, body } =
+    useNotes();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -27,31 +20,10 @@ const AddPage = () => {
       localizationSwal.areYouSure,
       (confirmed) => {
         if (confirmed) {
-          callInsertNote();
+          handleInsertNote();
         }
       }
     );
-  };
-
-  const callInsertNote = async () => {
-    try {
-      setIsLoading(true);
-      await insertNote({ title: title, body: body });
-
-      setIsLoading(false);
-      setTitle("");
-      setBody("");
-      swalSuccess(localizationSwal.success, localizationSwal.insertSuggest);
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof ApplicationException) {
-        swalWarning(localizationSwal.warning, error.message);
-      } else if (error instanceof ServerException) {
-        swalError(localizationSwal.serverError, error.message);
-      } else {
-        swalError(localizationSwal.anErrorOccured, error.message);
-      }
-    }
   };
 
   return (
@@ -69,7 +41,8 @@ const AddPage = () => {
                   type="text"
                   placeholder={localizationInput.titlePlaceholder}
                   required
-                  onChange={setTitle}
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicBody">
@@ -79,7 +52,8 @@ const AddPage = () => {
                   rows={5}
                   placeholder={localizationInput.detailPlaceholder}
                   required
-                  onChange={setBody}
+                  onChange={(e) => setBody(e.target.value)}
+                  value={body}
                 />
               </Form.Group>
               <Button variant="primary" type="submit" disabled={isLoading}>
