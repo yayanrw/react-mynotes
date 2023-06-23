@@ -28,8 +28,8 @@ const BaseNoteComponent = ({ child }) => {
   );
 };
 
-export default BaseNoteComponent;
-
 BaseNoteComponent.propTypes = {
   child: PropTypes.element.isRequired,
 };
+
+export default BaseNoteComponent;
