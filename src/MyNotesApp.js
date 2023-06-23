@@ -7,20 +7,13 @@ import ThemeContext from "./contexts/ThemeContext";
 import useTheme from "./hooks/useTheme";
 import AuthContext from "./contexts/AuthContext";
 import Routes from "./routes";
-import {
-  getLocalization,
-  getToken,
-} from "./datasources/local_storage_datasource";
-import { fetchLoggedUser } from "./datasources/auth_datasource";
-import { ApplicationException, ServerException } from "./utils/exceptions";
-import { swalError, swalWarning } from "./utils/swal_helper";
+import { getLocalization } from "./datasources/local_storage_datasource";
 import LoadingSpinnerComponent from "./components/LoadingSpinnerComponent";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(getLocalization() || ID_KEY);
   const [theme, toggleTheme] = useTheme();
   const [auth, setAuth] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const toggleLocalization = () => {
     setLocalization((prevLocale) => {
@@ -51,31 +44,6 @@ const MyNotesApp = () => {
     };
   }, [auth]);
 
-  const callLoggedUser = async () => {
-    try {
-      setIsLoading(true);
-      await fetchLoggedUser();
-      setIsLoading(false);
-      setAuth(1);
-    } catch (error) {
-      setIsLoading(false);
-      setAuth(null);
-      if (error instanceof ApplicationException) {
-        swalWarning("Warning", error.message);
-      } else if (error instanceof ServerException) {
-        swalError("Server error", error.message);
-      } else {
-        swalError("An error occured", error.message);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (getToken() !== null) {
-      callLoggedUser();
-    }
-  }, []);
-
   return (
     <>
       <LocalizationContext.Provider value={localizationContextValue}>
@@ -85,7 +53,7 @@ const MyNotesApp = () => {
               <NavBarComponent />
             </header>
             <main className="my-background-lighter">
-              {isLoading ? <LoadingSpinnerComponent /> : <Routes />}
+              <Routes />
             </main>
             <footer>
               <FooterComponent />
