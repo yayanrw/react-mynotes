@@ -7,7 +7,7 @@ const SearchComponent = ({ keyword, keywordChange }) => {
   const localization = useLocalization("input");
 
   return (
-    <Form className="d-flex pt-5 px-5">
+    <Form className="d-flex pt-5 px-lg-5">
       <Form.Control
         type="search"
         placeholder={localization.searchPlaceholder}

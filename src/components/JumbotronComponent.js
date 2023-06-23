@@ -9,8 +9,8 @@ const JumbotronComponent = ({ keyword, onKeywordChangeHandler }) => {
 
   return (
     <Container fluid>
-      <Row className="p-5 my-background text-center">
-        <Col className="px-5">
+      <Row className="py-lg-5 py-sm-5 my-background text-center">
+        <Col>
           <Container>
             <h2>{localization.appQuote}</h2>
             <SearchComponent
