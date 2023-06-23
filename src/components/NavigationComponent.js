@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Nav } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import TabTitleComponent from "./TabTitleComponent";
 import useLocalization from "../hooks/useLocalization";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import MyNavLink from "./MyNavLink";
 
 const NavigationComponent = () => {
   const localization = useLocalization("nav");
@@ -19,45 +20,30 @@ const NavigationComponent = () => {
         className="mb-5 mt-5"
       >
         <Nav.Item>
-          <Nav.Link
-            as={Link}
-            to="/notes/add"
-            eventKey="/notes/add"
-            active={location.pathname.startsWith("/notes/add")}
-          >
+          <MyNavLink to="/notes/add">
             <TabTitleComponent
               title={localization.addNewNote}
               icon={<FontAwesomeIcon icon={solid("square-plus")} />}
             />
-          </Nav.Link>
+          </MyNavLink>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link
-            as={Link}
-            to="/notes/active"
-            eventKey="/notes/active"
-            active={location.pathname === "/notes/active"}
-          >
+          <MyNavLink to="/notes/active">
             <TabTitleComponent
               title={localization.activeNotes}
               icon={<FontAwesomeIcon icon={solid("square-check")} />}
               badgeType="primary"
             />
-          </Nav.Link>
+          </MyNavLink>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link
-            as={Link}
-            to="/notes/archive"
-            eventKey="/notes/archive"
-            active={location.pathname.startsWith("/notes/archive")}
-          >
+          <MyNavLink to="/notes/archive">
             <TabTitleComponent
               title={localization.archivedNotes}
               icon={<FontAwesomeIcon icon={solid("archive")} />}
               badgeType="secondary"
             />
-          </Nav.Link>
+          </MyNavLink>
         </Nav.Item>
       </Nav>
     </Container>
