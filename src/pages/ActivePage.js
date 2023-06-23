@@ -5,8 +5,10 @@ import { ApplicationException, ServerException } from "../utils/exceptions";
 import { swalError, swalWarning } from "../utils/swal_helper";
 import useLocalization from "../hooks/useLocalization";
 import LoadingSpinnerComponent from "../components/LoadingSpinnerComponent";
+import { useSearchParams } from "react-router-dom";
 
 const ActivePage = () => {
+  const [searchParams] = useSearchParams();
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const localizationSwal = useLocalization("swal");
