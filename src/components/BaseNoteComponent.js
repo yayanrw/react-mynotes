@@ -16,14 +16,14 @@ const BaseNoteComponent = ({ child }) => {
   };
 
   return (
-    <>
+    <Container>
       <JumbotronComponent
         keyword={keyword}
         onKeywordChangeHandler={onKeywordChangeHandler}
       />
       <NavigationComponent />
       <Container style={{ minHeight: "800px" }}>{child}</Container>
-    </>
+    </Container>
   );
 };
 
