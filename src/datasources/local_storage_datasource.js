@@ -1,4 +1,9 @@
-import { LOCALIZATION_KEY, THEME_KEY, TOKEN_KEY } from "../utils/constants";
+import {
+  LOCALIZATION_KEY,
+  THEME_KEY,
+  TOKEN_KEY,
+  USER_KEY,
+} from "../utils/constants";
 
 const getToken = () => {
   return localStorage.getItem(TOKEN_KEY);
@@ -28,6 +33,14 @@ const setLocalization = (localization) => {
   localStorage.setItem(LOCALIZATION_KEY, localization);
 };
 
+const getUser = () => {
+  return JSON.parse(localStorage.getItem(USER_KEY));
+};
+
+const setUser = (user) => {
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
+};
+
 export {
   getToken,
   setToken,
@@ -36,4 +49,6 @@ export {
   setTheme,
   getLocalization,
   setLocalization,
+  getUser,
+  setUser,
 };
