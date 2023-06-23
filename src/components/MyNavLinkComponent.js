@@ -22,7 +22,7 @@ const MyNavLinkComponent = ({ to, children }) => {
 
 MyNavLinkComponent.propTypes = {
   to: PropTypes.string.isRequired,
-  child: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default MyNavLinkComponent;

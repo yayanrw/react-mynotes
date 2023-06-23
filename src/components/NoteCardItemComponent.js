@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
@@ -23,8 +23,6 @@ const NoteCardItemComponent = ({
   const localizationSwal = useLocalization("swal");
 
   const [lang, setLang] = useState();
-
-  setLang(getLocalization());
 
   const {
     handleArchiveNote,
@@ -74,6 +72,10 @@ const NoteCardItemComponent = ({
       }
     );
   };
+
+  useEffect(() => {
+    setLang(getLocalization());
+  }, []);
 
   return (
     <Col xl="3" lg="4" md="6" sm="12" className="pb-4">
