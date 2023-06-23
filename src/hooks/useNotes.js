@@ -29,13 +29,15 @@ const useNotes = () => {
   const localizationSwal = useLocalization("swal");
 
   useEffect(() => {
+    if (searchParams.get("keyword") === null) return setFilteredNotes(notes);
+
     const filter = notes.filter((note) =>
       note.title
         .toLowerCase()
-        .includes(searchParams.get("keyword").toLowerCase())
+        .includes(searchParams.get("keyword")?.toLowerCase())
     );
     setFilteredNotes(filter);
-  }, [searchParams]);
+  }, [searchParams, notes]);
 
   const handleGetActiveNotes = async () => {
     try {
@@ -43,7 +45,6 @@ const useNotes = () => {
       const { data } = await fetchActiveNotes();
       setIsLoading(false);
       setNotes(data);
-      setFilteredNotes(data);
     } catch (error) {
       setIsLoading(false);
       handleApiError(error);
