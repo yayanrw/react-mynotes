@@ -11,7 +11,7 @@ const NotesListComponent = ({ notes }) => {
     <Row>
       {notes.length > 0 ? (
         notes.map((note) => {
-          return <NoteCardItemComponent key={note.id} id={note.id} {...note} />;
+          return <NoteCardItemComponent key={note.id} {...note} />;
         })
       ) : (
         <Col className="text-center mt-5 pt-5" as="h5">
