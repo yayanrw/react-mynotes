@@ -11,3 +11,4 @@ export const THEME_KEY = "theme";
 export const DATA_THEME = "data-theme";
 export const BASE_URL = "https://notes-api.dicoding.dev/v1";
 export const TOKEN_KEY = "token";
+export const USER_KEY = "user";
