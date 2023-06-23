@@ -70,6 +70,7 @@ const useNotes = () => {
         title: title,
         body: body,
       });
+      resetState();
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -123,6 +124,12 @@ const useNotes = () => {
       setIsLoading(false);
       handleApiError(error);
     }
+  };
+
+  const resetState = () => {
+    setId("");
+    setTitle("");
+    setBody("");
   };
 
   return {
