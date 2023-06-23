@@ -1,39 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import NotesListComponent from "../components/NotesListComponent";
-import { fetchActiveNotes } from "../datasources/note_datasource";
-import { ApplicationException, ServerException } from "../utils/exceptions";
-import { swalError, swalWarning } from "../utils/swal_helper";
-import useLocalization from "../hooks/useLocalization";
 import LoadingSpinnerComponent from "../components/LoadingSpinnerComponent";
-import { useSearchParams } from "react-router-dom";
+import useNotes from "../hooks/useNotes";
 
 const ActivePage = () => {
-  const [searchParams] = useSearchParams();
-  const [notes, setNotes] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const localizationSwal = useLocalization("swal");
-
-  const callNotesFromApi = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await fetchActiveNotes();
-
-      setIsLoading(false);
-      setNotes(data);
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof ApplicationException) {
-        swalWarning(localizationSwal.warning, error.message);
-      } else if (error instanceof ServerException) {
-        swalError(localizationSwal.serverError, error.message);
-      } else {
-        swalError(localizationSwal.anErrorOccured, error.message);
-      }
-    }
-  };
+  const { handleGetActiveNotes, isLoading, filteredNotes } = useNotes();
 
   useEffect(() => {
-    callNotesFromApi();
+    handleGetActiveNotes();
   }, []);
 
   return (
@@ -41,7 +15,7 @@ const ActivePage = () => {
       {isLoading ? (
         <LoadingSpinnerComponent />
       ) : (
-        <NotesListComponent notes={notes} />
+        <NotesListComponent notes={filteredNotes} />
       )}
     </>
   );
