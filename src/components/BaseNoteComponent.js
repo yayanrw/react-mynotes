@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import JumbotronComponent from "./JumbotronComponent";
 import NavigationComponent from "./NavigationComponent";
 import { Container } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const BaseNoteComponent = ({ child }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,3 +29,7 @@ const BaseNoteComponent = ({ child }) => {
 };
 
 export default BaseNoteComponent;
+
+BaseNoteComponent.propTypes = {
+  child: PropTypes.element.isRequired,
+};
