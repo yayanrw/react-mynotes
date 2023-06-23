@@ -18,9 +18,9 @@ const AddPage = () => {
       localizationSwal.insertDataWarn,
       localizationSwal.insertIt,
       localizationSwal.areYouSure,
-      (confirmed) => {
+      async (confirmed) => {
         if (confirmed) {
-          handleInsertNote();
+          await handleInsertNote();
         }
       }
     );
