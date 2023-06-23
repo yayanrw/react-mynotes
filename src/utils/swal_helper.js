@@ -17,17 +17,34 @@ const confirmationDialog = (warnText, suggestionText, areYouSure, callBack) => {
     }
   });
 };
-
 const swalSuccess = (type, suggestionText) => {
-  Swal.fire(type, suggestionText, "success");
+  Swal.fire({
+    icon: "success",
+    title: type,
+    text: suggestionText,
+    showConfirmButton: false,
+    timer: 1000, // Adjust the timer as needed
+  });
 };
 
 const swalError = (type, message) => {
-  Swal.fire(type, message, "error");
+  Swal.fire({
+    icon: "error",
+    title: type,
+    text: message,
+    showConfirmButton: false,
+    timer: 1000, // Adjust the timer as needed
+  });
 };
 
 const swalWarning = (type, message) => {
-  Swal.fire(type, message, "warning");
+  Swal.fire({
+    icon: "warning",
+    title: type,
+    text: message,
+    showConfirmButton: false,
+    timer: 1000, // Adjust the timer as needed
+  });
 };
 
 export { confirmationDialog, swalSuccess, swalWarning, swalError };
