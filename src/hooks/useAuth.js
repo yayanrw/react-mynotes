@@ -12,7 +12,6 @@ const useAuth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [isPasswordSame, setIsPasswordSame] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { setAuth } = useContext(AuthContext);
@@ -71,7 +70,6 @@ const useAuth = () => {
     setPassword,
     setPasswordConfirmation,
     isLoading,
-    isPasswordSame,
     handleLogin,
     handleRegister,
     handleLogout,
