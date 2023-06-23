@@ -1,15 +1,13 @@
 import React from "react";
 import { Container, Nav } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
 import TabTitleComponent from "./TabTitleComponent";
 import useLocalization from "../hooks/useLocalization";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import MyNavLink from "./MyNavLink";
+import MyNavLink from "./MyNavLinkComponent";
 
 const NavigationComponent = () => {
   const localization = useLocalization("nav");
-  const location = useLocation();
 
   return (
     <Container>
