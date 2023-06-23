@@ -1,8 +1,17 @@
 import { useContext, useState } from "react";
-import { fetchLogin, fetchRegister } from "../datasources/auth_datasource";
+import {
+  fetchLoggedUser,
+  fetchLogin,
+  fetchRegister,
+} from "../datasources/auth_datasource";
 import AuthContext from "../contexts/AuthContext";
 import useErrorNetworkHandler from "./useErrorNetworkHandler";
-import { removeToken, setToken } from "../datasources/local_storage_datasource";
+import {
+  removeToken,
+  removeUser,
+  setToken,
+  setUser,
+} from "../datasources/local_storage_datasource";
 import { useNavigate } from "react-router-dom";
 import { swalSuccess } from "../utils/swal_helper";
 import useLocalization from "./useLocalization";
@@ -50,7 +59,23 @@ const useAuth = () => {
   const handleLogout = () => {
     removeToken();
     setAuth(null);
+    removeUser();
     navigate("/login");
+  };
+
+  const handleLoggedUser = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await fetchLoggedUser();
+      setAuth(1);
+      setUser(data);
+      setIsLoading(false);
+    } catch (error) {
+      setAuth(null);
+      removeUser();
+      setIsLoading(false);
+      handleApiError(error);
+    }
   };
 
   const resetState = () => {
@@ -73,6 +98,7 @@ const useAuth = () => {
     handleLogin,
     handleRegister,
     handleLogout,
+    handleLoggedUser,
   };
 };
 
