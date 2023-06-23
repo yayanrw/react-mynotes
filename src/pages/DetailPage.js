@@ -1,50 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Badge, Card, Col, Form, Row } from "react-bootstrap";
 import { showFormattedDate } from "../utils/date_helper";
 import { useParams } from "react-router-dom";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
 import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
-import { fetchNote } from "../datasources/note_datasource";
-import { ApplicationException, ServerException } from "../utils/exceptions";
-import { swalError, swalWarning } from "../utils/swal_helper";
 import LoadingSpinnerComponent from "../components/LoadingSpinnerComponent";
+import useNotes from "../hooks/useNotes";
 
 const DetailPage = () => {
   const { id } = useParams();
-  const [note, setNote] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const localizationCard = useLocalization("card");
   const localizationInput = useLocalization("input");
   const localizationSwal = useLocalization("swal");
 
+  const { handleGetNote, note, isLoading } = useNotes();
+
   const { localization } = useContext(LocalizationContext);
   const lang = localization === ID_KEY ? ID_LANG : EN_LANG;
 
-  const callDetailNote = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await fetchNote(id);
-      setNote(data);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof ApplicationException) {
-        swalWarning(localizationSwal.warning, error.message);
-      } else if (error instanceof ServerException) {
-        swalError(localizationSwal.serverError, error.message);
-      } else {
-        swalError(localizationSwal.anErrorOccured, error.message);
-      }
-    }
-  };
-
   useEffect(() => {
-    callDetailNote();
-
-    return () => {
-      setNote(null);
-    };
+    handleGetNote(id);
   }, [id]);
 
   return (
