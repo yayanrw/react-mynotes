@@ -6,6 +6,8 @@ import useInput from "../hooks/useInput";
 import useLocalization from "../hooks/useLocalization";
 
 const NoteFormComponent = ({ onAddNotes }) => {
+  // TODO: add validation to form
+
   const [title, setTitle] = useInput("");
   const [body, setBody] = useInput("");
   const localizationInput = useLocalization("input");
