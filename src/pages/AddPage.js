@@ -1,18 +1,18 @@
 import React from "react";
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
-import { confirmationDialog } from "../utils/swal_helper";
-import PropTypes from "prop-types";
-import useInput from "../hooks/useInput";
 import useLocalization from "../hooks/useLocalization";
+import { confirmationDialog } from "../utils/swal_helper";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import useNotes from "../hooks/useNotes";
 
-const NoteFormComponent = ({ onAddNotes }) => {
-  const [title, setTitle] = useInput("");
-  const [body, setBody] = useInput("");
+const AddPage = () => {
   const localizationInput = useLocalization("input");
   const localizationCard = useLocalization("card");
   const localizationSwal = useLocalization("swal");
 
-  const onSubmitEventHandler = (event) => {
+  const { isLoading, handleInsertNote, setTitle, setBody, title, body } =
+    useNotes();
+
+  const submitHandler = async (event) => {
     event.preventDefault();
     confirmationDialog(
       localizationSwal.insertDataWarn,
@@ -20,10 +20,7 @@ const NoteFormComponent = ({ onAddNotes }) => {
       localizationSwal.areYouSure,
       (confirmed) => {
         if (confirmed) {
-          onAddNotes({
-            title: title,
-            body: body,
-          });
+          handleInsertNote();
         }
       }
     );
@@ -37,14 +34,15 @@ const NoteFormComponent = ({ onAddNotes }) => {
             {localizationCard.newNote}
           </Card.Header>
           <Card.Body className="my-card-body">
-            <Form onSubmit={onSubmitEventHandler}>
+            <Form onSubmit={submitHandler}>
               <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label>{localizationInput.title}</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder={localizationInput.titlePlaceholder}
                   required
-                  onChange={setTitle}
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicBody">
@@ -54,11 +52,14 @@ const NoteFormComponent = ({ onAddNotes }) => {
                   rows={5}
                   placeholder={localizationInput.detailPlaceholder}
                   required
-                  onChange={setBody}
+                  onChange={(e) => setBody(e.target.value)}
+                  value={body}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
-                {localizationInput.submit}
+              <Button variant="primary" type="submit" disabled={isLoading}>
+                {isLoading
+                  ? localizationInput.loading
+                  : localizationInput.submit}
               </Button>
             </Form>
           </Card.Body>
@@ -68,8 +69,4 @@ const NoteFormComponent = ({ onAddNotes }) => {
   );
 };
 
-NoteFormComponent.propTypes = {
-  onAddNotes: PropTypes.func.isRequired,
-};
-
-export default NoteFormComponent;
+export default AddPage;

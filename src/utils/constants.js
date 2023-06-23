@@ -1,0 +1,14 @@
+export const AUTHOR = "Yayan Rahmat Wijaya";
+export const APP_NAME = "MyAwesomeNote";
+export const ID_KEY = "id";
+export const EN_KEY = "en";
+export const ID_LANG = "id-ID";
+export const EN_LANG = "en-US";
+export const DARK_KEY = "dark";
+export const LIGHT_KEY = "light";
+export const LOCALIZATION_KEY = "localization";
+export const THEME_KEY = "theme";
+export const DATA_THEME = "data-theme";
+export const BASE_URL = "https://notes-api.dicoding.dev/v1";
+export const TOKEN_KEY = "token";
+export const USER_KEY = "user";
