@@ -1,26 +1,24 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, Card, Col, Form, Row } from "react-bootstrap";
 import { showFormattedDate } from "../utils/date_helper";
 import { useParams } from "react-router-dom";
 import useLocalization from "../hooks/useLocalization";
-import LocalizationContext from "../contexts/LocalizationContext";
-import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
 import LoadingSpinnerComponent from "../components/LoadingSpinnerComponent";
 import useNotes from "../hooks/useNotes";
+import { getLocalization } from "../datasources/local_storage_datasource";
 
 const DetailPage = () => {
   const { id } = useParams();
+  const [lang, setLang] = useState();
   const localizationCard = useLocalization("card");
   const localizationInput = useLocalization("input");
   const localizationSwal = useLocalization("swal");
 
   const { handleGetNote, note, isLoading } = useNotes();
 
-  const { localization } = useContext(LocalizationContext);
-  const lang = localization === ID_KEY ? ID_LANG : EN_LANG;
-
   useEffect(() => {
     handleGetNote(id);
+    setLang(getLocalization());
   }, [id]);
 
   return (
@@ -36,7 +34,7 @@ const DetailPage = () => {
           ) : (
             <Col>
               <Card className="card-height">
-                <Card.Header as="h5" className="p-3">
+                <Card.Header as="h5" className="p-3 my-card-header">
                   {localizationCard.detailNote}{" "}
                   <Badge bg={note.archived ? "success" : "warning"}>
                     {note.archived
@@ -44,7 +42,7 @@ const DetailPage = () => {
                       : localizationCard.unArchive}
                   </Badge>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body className="my-card-body">
                   <Form>
                     <Form.Group className="mb-3" controlId="formBasicTitle">
                       <Form.Label>{localizationInput.title}</Form.Label>

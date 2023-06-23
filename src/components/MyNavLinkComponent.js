@@ -1,7 +1,8 @@
 import { Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const MyNavLink = ({ to, children }) => {
+const MyNavLinkComponent = ({ to, children }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const search = searchParams.toString();
@@ -19,4 +20,9 @@ const MyNavLink = ({ to, children }) => {
   );
 };
 
-export default MyNavLink;
+MyNavLinkComponent.propTypes = {
+  to: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+};
+
+export default MyNavLinkComponent;

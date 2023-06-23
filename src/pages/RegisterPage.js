@@ -48,9 +48,9 @@ const RegisterPage = () => {
         localizationSwal.registerDataWarn,
         localizationSwal.registerIt,
         localizationSwal.areYouSure,
-        (confirmed) => {
+        async (confirmed) => {
           if (confirmed) {
-            handleRegister();
+            await handleRegister();
           }
         }
       );

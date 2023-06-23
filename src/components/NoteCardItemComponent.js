@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
@@ -6,10 +6,9 @@ import { showFormattedDate } from "../utils/date_helper";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
-import LocalizationContext from "../contexts/LocalizationContext";
-import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
 import { confirmationDialog } from "../utils/swal_helper";
 import useNotes from "../hooks/useNotes";
+import { getLocalization } from "../datasources/local_storage_datasource";
 
 const NoteCardItemComponent = ({
   title,
@@ -22,8 +21,9 @@ const NoteCardItemComponent = ({
   const navigate = useNavigate();
   const localizationCard = useLocalization("card");
   const localizationSwal = useLocalization("swal");
-  const { localization } = useContext(LocalizationContext);
-  const lang = localization === ID_KEY ? ID_LANG : EN_LANG;
+
+  const [lang, setLang] = useState();
+
   const {
     handleArchiveNote,
     handleUnArchiveNote,
@@ -72,6 +72,10 @@ const NoteCardItemComponent = ({
       }
     );
   };
+
+  useEffect(() => {
+    setLang(getLocalization());
+  }, []);
 
   return (
     <Col xl="3" lg="4" md="6" sm="12" className="pb-4">
@@ -135,6 +139,7 @@ NoteCardItemComponent.propTypes = {
   archived: PropTypes.bool.isRequired,
   createdAt: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  setOnAction: PropTypes.func.isRequired,
 };
 
 export default NoteCardItemComponent;

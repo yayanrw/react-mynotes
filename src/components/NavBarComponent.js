@@ -24,9 +24,9 @@ const NavBarComponent = () => {
       localizationSwal.logOutWarn,
       localizationSwal.logOutIt,
       localizationSwal.areYouSure,
-      (confirmed) => {
+      async (confirmed) => {
         if (confirmed) {
-          handleLogout();
+          await handleLogout();
         }
       }
     );

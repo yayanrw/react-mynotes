@@ -56,7 +56,7 @@ const useAuth = () => {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     removeToken();
     setAuth(null);
     removeUser();
