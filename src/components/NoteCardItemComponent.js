@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
@@ -8,18 +8,8 @@ import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
 import LocalizationContext from "../contexts/LocalizationContext";
 import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
-import {
-  archiveNote,
-  deleteNote,
-  unArchiveNote,
-} from "../datasources/note_datasource";
-import { ApplicationException, ServerException } from "../utils/exceptions";
-import {
-  confirmationDialog,
-  swalError,
-  swalSuccess,
-  swalWarning,
-} from "../utils/swal_helper";
+import { confirmationDialog } from "../utils/swal_helper";
+import useNotes from "../hooks/useNotes";
 
 const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
   const navigate = useNavigate();
@@ -27,7 +17,12 @@ const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
   const localizationSwal = useLocalization("swal");
   const { localization } = useContext(LocalizationContext);
   const lang = localization === ID_KEY ? ID_LANG : EN_LANG;
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    handleArchiveNote,
+    handleUnArchiveNote,
+    handleDeleteNote,
+    isLoading,
+  } = useNotes();
 
   const archiveHandler = async (id) => {
     confirmationDialog(
@@ -36,7 +31,7 @@ const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
       localizationSwal.areYouSure,
       (confirmed) => {
         if (confirmed) {
-          callArchive(id);
+          handleArchiveNote(id);
         }
       }
     );
@@ -49,7 +44,7 @@ const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
       localizationSwal.areYouSure,
       (confirmed) => {
         if (confirmed) {
-          callUnArchive(id);
+          handleUnArchiveNote(id);
         }
       }
     );
@@ -62,64 +57,10 @@ const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
       localizationSwal.areYouSure,
       (confirmed) => {
         if (confirmed) {
-          callDelete(id);
+          handleDeleteNote(id);
         }
       }
     );
-  };
-
-  const callArchive = async (id) => {
-    try {
-      setIsLoading(true);
-      await archiveNote(id);
-      swalSuccess(localizationSwal.success, localizationSwal.archiveSuggest);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof ApplicationException) {
-        swalWarning(localizationSwal.warning, error.message);
-      } else if (error instanceof ServerException) {
-        swalError(localizationSwal.serverError, error.message);
-      } else {
-        swalError(localizationSwal.anErrorOccured, error.message);
-      }
-    }
-  };
-
-  const callUnArchive = async (id) => {
-    try {
-      setIsLoading(true);
-      await unArchiveNote(id);
-      swalSuccess(localizationSwal.success, localizationSwal.unArchiveSuggest);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof ApplicationException) {
-        swalWarning(localizationSwal.warning, error.message);
-      } else if (error instanceof ServerException) {
-        swalError(localizationSwal.serverError, error.message);
-      } else {
-        swalError(localizationSwal.anErrorOccured, error.message);
-      }
-    }
-  };
-
-  const callDelete = async (id) => {
-    try {
-      setIsLoading(true);
-      await deleteNote(id);
-      swalSuccess(localizationSwal.success, localizationSwal.deleteSuggest);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof ApplicationException) {
-        swalWarning(localizationSwal.warning, error.message);
-      } else if (error instanceof ServerException) {
-        swalError(localizationSwal.serverError, error.message);
-      } else {
-        swalError(localizationSwal.anErrorOccured, error.message);
-      }
-    }
   };
 
   return (
