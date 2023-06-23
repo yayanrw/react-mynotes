@@ -30,7 +30,7 @@ const NotesListComponent = ({ notes, setOnAction }) => {
 
 NotesListComponent.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setOnAction: PropTypes.number.isRequired,
+  setOnAction: PropTypes.func.isRequired,
 };
 
 export default NotesListComponent;
