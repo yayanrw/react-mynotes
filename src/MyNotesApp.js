@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import NavBarComponent from "./components/NavBarComponent";
 import FooterComponent from "./components/FooterComponent";
 import LocalizationContext from "./contexts/LocalizationContext";
@@ -8,7 +8,6 @@ import useTheme from "./hooks/useTheme";
 import AuthContext from "./contexts/AuthContext";
 import Routes from "./routes";
 import { getLocalization } from "./datasources/local_storage_datasource";
-import LoadingSpinnerComponent from "./components/LoadingSpinnerComponent";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(getLocalization() || ID_KEY);
