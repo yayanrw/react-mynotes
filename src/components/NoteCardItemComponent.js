@@ -11,7 +11,14 @@ import { EN_LANG, ID_KEY, ID_LANG } from "../utils/constants";
 import { confirmationDialog } from "../utils/swal_helper";
 import useNotes from "../hooks/useNotes";
 
-const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
+const NoteCardItemComponent = ({
+  title,
+  body,
+  archived,
+  createdAt,
+  id,
+  setOnAction,
+}) => {
   const navigate = useNavigate();
   const localizationCard = useLocalization("card");
   const localizationSwal = useLocalization("swal");
@@ -32,6 +39,7 @@ const NoteCardItemComponent = ({ title, body, archived, createdAt, id }) => {
       (confirmed) => {
         if (confirmed) {
           handleArchiveNote(id);
+          setOnAction(Math.random());
         }
       }
     );

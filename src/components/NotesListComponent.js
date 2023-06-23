@@ -4,14 +4,20 @@ import NoteCardItemComponent from "./NoteCardItemComponent";
 import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
 
-const NotesListComponent = ({ notes }) => {
+const NotesListComponent = ({ notes, setOnAction }) => {
   const localization = useLocalization("swal");
 
   return (
     <Row>
       {notes.length > 0 ? (
         notes.map((note) => {
-          return <NoteCardItemComponent key={note.id} {...note} />;
+          return (
+            <NoteCardItemComponent
+              key={note.id}
+              {...note}
+              setOnAction={setOnAction}
+            />
+          );
         })
       ) : (
         <Col className="text-center mt-5 pt-5" as="h5">
