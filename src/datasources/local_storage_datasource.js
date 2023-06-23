@@ -41,6 +41,10 @@ const setUser = (user) => {
   localStorage.setItem(USER_KEY, JSON.stringify(user));
 };
 
+const removeUser = () => {
+  localStorage.removeItem(USER_KEY);
+};
+
 export {
   getToken,
   setToken,
@@ -51,4 +55,5 @@ export {
   setLocalization,
   getUser,
   setUser,
+  removeUser,
 };
