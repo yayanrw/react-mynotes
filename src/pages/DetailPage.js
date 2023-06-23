@@ -34,7 +34,7 @@ const DetailPage = () => {
           ) : (
             <Col>
               <Card className="card-height">
-                <Card.Header as="h5" className="p-3">
+                <Card.Header as="h5" className="p-3 my-card-header">
                   {localizationCard.detailNote}{" "}
                   <Badge bg={note.archived ? "success" : "warning"}>
                     {note.archived
@@ -42,7 +42,7 @@ const DetailPage = () => {
                       : localizationCard.unArchive}
                   </Badge>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body className="my-card-body">
                   <Form>
                     <Form.Group className="mb-3" controlId="formBasicTitle">
                       <Form.Label>{localizationInput.title}</Form.Label>
