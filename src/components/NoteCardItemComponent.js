@@ -135,6 +135,7 @@ NoteCardItemComponent.propTypes = {
   archived: PropTypes.bool.isRequired,
   createdAt: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  setOnAction: PropTypes.number.isRequired,
 };
 
 export default NoteCardItemComponent;
