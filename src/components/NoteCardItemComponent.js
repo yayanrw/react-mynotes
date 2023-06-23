@@ -36,9 +36,9 @@ const NoteCardItemComponent = ({
       localizationSwal.archiveDataWarn,
       localizationSwal.archiveIt,
       localizationSwal.areYouSure,
-      (confirmed) => {
+      async (confirmed) => {
         if (confirmed) {
-          handleArchiveNote(id);
+          await handleArchiveNote(id);
           setOnAction(Math.random());
         }
       }
@@ -50,9 +50,10 @@ const NoteCardItemComponent = ({
       localizationSwal.unArchiveDataWarn,
       localizationSwal.unArchiveIt,
       localizationSwal.areYouSure,
-      (confirmed) => {
+      async (confirmed) => {
         if (confirmed) {
-          handleUnArchiveNote(id);
+          await handleUnArchiveNote(id);
+          setOnAction(Math.random());
         }
       }
     );
@@ -63,9 +64,10 @@ const NoteCardItemComponent = ({
       localizationSwal.deleteDataWarn,
       localizationSwal.deleteIt,
       localizationSwal.areYouSure,
-      (confirmed) => {
+      async (confirmed) => {
         if (confirmed) {
-          handleDeleteNote(id);
+          await handleDeleteNote(id);
+          setOnAction(Math.random());
         }
       }
     );
