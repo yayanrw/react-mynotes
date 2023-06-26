@@ -32,8 +32,6 @@ const swalError = (type, message) => {
     icon: "error",
     title: type,
     text: message,
-    showConfirmButton: false,
-    timer: 1000, // Adjust the timer as needed
   });
 };
 
@@ -42,8 +40,6 @@ const swalWarning = (type, message) => {
     icon: "warning",
     title: type,
     text: message,
-    showConfirmButton: false,
-    timer: 1000, // Adjust the timer as needed
   });
 };
 
