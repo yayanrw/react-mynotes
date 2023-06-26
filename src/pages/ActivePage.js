@@ -4,19 +4,27 @@ import LoadingSpinnerComponent from "../components/LoadingSpinnerComponent";
 import useNotes from "../hooks/useNotes";
 
 const ActivePage = () => {
-  const [onAction, setOnAction] = useState(0);
-  const { handleGetActiveNotes, isLoading, filteredNotes } = useNotes(onAction);
+  const [noteOnAction, setNoteOnAction] = useState(0);
+  const { handleGetActiveNotes, isLoading, filteredNotes, removeSelectedNote } =
+    useNotes();
 
   useEffect(() => {
     handleGetActiveNotes();
-  }, [onAction]);
+  }, []);
+
+  useEffect(() => {
+    removeSelectedNote(noteOnAction);
+  }, [noteOnAction]);
 
   return (
     <>
       {isLoading ? (
         <LoadingSpinnerComponent />
       ) : (
-        <NotesListComponent notes={filteredNotes} setOnAction={setOnAction} />
+        <NotesListComponent
+          notes={filteredNotes}
+          setNoteOnAction={setNoteOnAction}
+        />
       )}
     </>
   );

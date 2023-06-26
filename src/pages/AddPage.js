@@ -13,23 +13,21 @@ const AddPage = () => {
   const { isLoading, handleInsertNote, setTitle, setBody, title, body } =
     useNotes();
 
-  const [titleValue, titleError, titleValidate] = useForm("", {
+  const [titleValue, titleError, titleValidate, titleIsValid] = useForm("", {
     required: true,
   });
 
-  const [bodyValue, bodyError, bodyValidate] = useForm("", {
+  const [bodyValue, bodyError, bodyValidate, bodyIsValid] = useForm("", {
     required: true,
   });
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    if (
-      titleValue !== "" &&
-      titleError === "" &&
-      bodyValue !== "" &&
-      bodyError === ""
-    ) {
+    titleValidate(titleValue);
+    bodyValidate(bodyValue);
+
+    if (isValid()) {
       confirmationDialog(
         localizationSwal.insertDataWarn,
         localizationSwal.insertIt,
@@ -40,11 +38,10 @@ const AddPage = () => {
           }
         }
       );
-    } else {
-      titleValidate(titleValue);
-      bodyValidate(bodyValue);
     }
   };
+
+  const isValid = () => titleIsValid && bodyIsValid;
 
   return (
     <Row>

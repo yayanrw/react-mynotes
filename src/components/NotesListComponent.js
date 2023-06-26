@@ -4,7 +4,7 @@ import NoteCardItemComponent from "./NoteCardItemComponent";
 import PropTypes from "prop-types";
 import useLocalization from "../hooks/useLocalization";
 
-const NotesListComponent = ({ notes, setOnAction }) => {
+const NotesListComponent = ({ notes, setNoteOnAction }) => {
   const localization = useLocalization("swal");
 
   return (
@@ -15,7 +15,7 @@ const NotesListComponent = ({ notes, setOnAction }) => {
             <NoteCardItemComponent
               key={note.id}
               {...note}
-              setOnAction={setOnAction}
+              setNoteOnAction={setNoteOnAction}
             />
           );
         })
@@ -30,7 +30,7 @@ const NotesListComponent = ({ notes, setOnAction }) => {
 
 NotesListComponent.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setOnAction: PropTypes.func.isRequired,
+  setNoteOnAction: PropTypes.func.isRequired,
 };
 
 export default NotesListComponent;

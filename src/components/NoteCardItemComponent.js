@@ -16,7 +16,7 @@ const NoteCardItemComponent = ({
   archived,
   createdAt,
   id,
-  setOnAction,
+  setNoteOnAction,
 }) => {
   const navigate = useNavigate();
   const localizationCard = useLocalization("card");
@@ -38,8 +38,8 @@ const NoteCardItemComponent = ({
       localizationSwal.areYouSure,
       async (confirmed) => {
         if (confirmed) {
-          await handleArchiveNote(id);
-          setOnAction(Math.random());
+          const isSuccess = await handleArchiveNote(id);
+          if (isSuccess) setNoteOnAction(id);
         }
       }
     );
@@ -52,8 +52,8 @@ const NoteCardItemComponent = ({
       localizationSwal.areYouSure,
       async (confirmed) => {
         if (confirmed) {
-          await handleUnArchiveNote(id);
-          setOnAction(Math.random());
+          const isSuccess = await handleUnArchiveNote(id);
+          if (isSuccess) setNoteOnAction(id);
         }
       }
     );
@@ -66,8 +66,8 @@ const NoteCardItemComponent = ({
       localizationSwal.areYouSure,
       async (confirmed) => {
         if (confirmed) {
-          await handleDeleteNote(id);
-          setOnAction(Math.random());
+          const isSuccess = await handleDeleteNote(id);
+          if (isSuccess) setNoteOnAction(id);
         }
       }
     );
@@ -139,7 +139,7 @@ NoteCardItemComponent.propTypes = {
   archived: PropTypes.bool.isRequired,
   createdAt: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  setOnAction: PropTypes.func.isRequired,
+  setNoteOnAction: PropTypes.func.isRequired,
 };
 
 export default NoteCardItemComponent;

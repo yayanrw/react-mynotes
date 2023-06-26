@@ -19,31 +19,29 @@ const RegisterPage = () => {
     isLoading,
     handleRegister,
   } = useAuth();
-  const [nameValue, nameError, nameValidate] = useForm("", {
+  const [nameValue, nameError, nameValidate, nameIsValid] = useForm("", {
     required: true,
     minLength: 3,
   });
 
-  const [emailValue, emailError, emailValidate] = useForm("", {
+  const [emailValue, emailError, emailValidate, emailIsValid] = useForm("", {
     required: true,
     type: "email",
   });
-  const [passwordValue, passwordError, passwordValidate] = useForm("", {
-    required: true,
-    minLength: 8,
-  });
+  const [passwordValue, passwordError, passwordValidate, passwordIsValid] =
+    useForm("", {
+      required: true,
+      minLength: 8,
+    });
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      nameValue !== "" &&
-      nameError === "" &&
-      emailValue !== "" &&
-      emailError === "" &&
-      passwordValue !== "" &&
-      passwordError === ""
-    ) {
+    nameValidate(nameValue);
+    emailValidate(emailValue);
+    passwordValidate(passwordValue);
+
+    if (isValid()) {
       confirmationDialog(
         localizationSwal.registerDataWarn,
         localizationSwal.registerIt,
@@ -54,12 +52,10 @@ const RegisterPage = () => {
           }
         }
       );
-    } else {
-      nameValidate(nameValue);
-      emailValidate(emailValue);
-      passwordValidate(passwordValue);
     }
   };
+
+  const isValid = () => nameIsValid && emailIsValid && passwordIsValid;
 
   return (
     <div
@@ -70,7 +66,7 @@ const RegisterPage = () => {
     >
       <Container>
         <h1 className="pb-5 text-center">{localizationInput.register}</h1>
-        <Form noValidate onSubmit={onSubmit}>
+        <Form noValidate onSubmit={onSubmit} style={{ color: "#000" }}>
           <FloatingLabel
             controlId="name"
             label={localizationInput.nameLabel}
@@ -145,11 +141,11 @@ const RegisterPage = () => {
                 : localizationInput.register}
             </Button>
           </div>
-          <p>
-            {localizationInput.haveAnAccount}{" "}
-            <Link to="/login">{localizationInput.login}</Link>
-          </p>
         </Form>
+        <p>
+          {localizationInput.haveAnAccount}{" "}
+          <Link to="/login">{localizationInput.login}</Link>
+        </p>
       </Container>
     </div>
   );

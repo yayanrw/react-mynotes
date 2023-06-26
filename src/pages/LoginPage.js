@@ -8,31 +8,29 @@ import useForm from "../hooks/useForm";
 
 const LoginPage = () => {
   const localizationInput = useLocalization("input");
-  const [emailValue, emailError, emailValidate] = useForm("", {
+  const [emailValue, emailError, emailValidate, emailIsValid] = useForm("", {
     required: true,
     type: "email",
   });
-  const [passwordValue, passwordError, passwordValidate] = useForm("", {
-    required: true,
-    minLength: 8,
-  });
+  const [passwordValue, passwordError, passwordValidate, passwordIsValid] =
+    useForm("", {
+      required: true,
+      minLength: 8,
+    });
   const { setEmail, setPassword, handleLogin, isLoading } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      emailValue !== "" &&
-      emailError === "" &&
-      passwordValue !== "" &&
-      passwordError === ""
-    ) {
+    emailValidate(emailValue);
+    passwordValidate(passwordValue);
+
+    if (isValid()) {
       handleLogin();
-    } else {
-      emailValidate(emailValue);
-      passwordValidate(passwordValue);
     }
   };
+
+  const isValid = () => emailIsValid && passwordIsValid;
 
   return (
     <div
@@ -43,7 +41,7 @@ const LoginPage = () => {
     >
       <Container>
         <h1 className="pb-5 text-center">{APP_NAME}</h1>
-        <Form noValidate onSubmit={onSubmit}>
+        <Form noValidate onSubmit={onSubmit} style={{ color: "#000" }}>
           <FloatingLabel
             controlId="floatingInput"
             label={localizationInput.emailLabel}
@@ -93,11 +91,11 @@ const LoginPage = () => {
               {isLoading ? localizationInput.loading : localizationInput.login}
             </Button>
           </div>
-          <p>
-            {localizationInput.dontHaveAccount}{" "}
-            <Link to="/register">{localizationInput.register}</Link>
-          </p>
         </Form>
+        <p>
+          {localizationInput.dontHaveAccount}{" "}
+          <Link to="/register">{localizationInput.register}</Link>
+        </p>
       </Container>
     </div>
   );

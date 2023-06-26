@@ -99,9 +99,11 @@ const useNotes = () => {
       resetState();
       setIsLoading(false);
       swalSuccess(localizationSwal.success, localizationSwal.archiveSuggest);
+      return true;
     } catch (error) {
       setIsLoading(false);
       handleApiError(error);
+      return false;
     }
   };
 
@@ -112,9 +114,11 @@ const useNotes = () => {
       resetState();
       setIsLoading(false);
       swalSuccess(localizationSwal.success, localizationSwal.unArchiveSuggest);
+      return true;
     } catch (error) {
       setIsLoading(false);
       handleApiError(error);
+      return false;
     }
   };
 
@@ -125,10 +129,17 @@ const useNotes = () => {
       resetState();
       setIsLoading(false);
       swalSuccess(localizationSwal.success, localizationSwal.deleteSuggest);
+      return true;
     } catch (error) {
       setIsLoading(false);
       handleApiError(error);
+      return false;
     }
+  };
+
+  const removeSelectedNote = async (id) => {
+    const updatedNotes = filteredNotes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
   };
 
   const resetState = () => {
@@ -152,6 +163,7 @@ const useNotes = () => {
     handleArchiveNote,
     handleUnArchiveNote,
     handleDeleteNote,
+    removeSelectedNote,
   };
 };
 
