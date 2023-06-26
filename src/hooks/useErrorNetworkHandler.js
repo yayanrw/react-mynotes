@@ -1,7 +1,10 @@
 import { useState } from "react";
 import useLocalization from "./useLocalization";
 import { swalError, swalWarning } from "../utils/swal_helper";
-import { ApplicationException, ServerException } from "../utils/exceptions";
+import {
+  ApplicationException,
+  ServerException,
+} from "../utils/exceptions_helper";
 
 const useErrorNetworkHandler = () => {
   const [error, setError] = useState({});
