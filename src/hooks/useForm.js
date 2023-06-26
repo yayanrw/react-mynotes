@@ -39,7 +39,12 @@ const useForm = (initialValue, validationSchema) => {
     return "";
   };
 
-  return [value, error, handleChange];
+  return [
+    value,
+    error,
+    handleChange,
+    validateInput(value, validationSchema) === "",
+  ];
 };
 
 export default useForm;
