@@ -1,15 +1,10 @@
-const showFormattedDate = (date, lang) => {
-  if (date && typeof date === "object") {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return new Date(date).toLocaleDateString(lang, options);
-  }
+import moment from "moment";
+import "moment/min/locales";
 
-  return ""; // or any default value you prefer
+const showFormattedDate = (date, lang) => {
+  moment.locale(lang);
+  const localDateTime = moment(date).format("llll");
+  return localDateTime;
 };
 
 export { showFormattedDate };
