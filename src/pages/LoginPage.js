@@ -41,7 +41,7 @@ const LoginPage = () => {
     >
       <Container>
         <h1 className="pb-5 text-center">{APP_NAME}</h1>
-        <Form noValidate onSubmit={onSubmit}>
+        <Form noValidate onSubmit={onSubmit} style={{ color: "#000" }}>
           <FloatingLabel
             controlId="floatingInput"
             label={localizationInput.emailLabel}
@@ -91,11 +91,11 @@ const LoginPage = () => {
               {isLoading ? localizationInput.loading : localizationInput.login}
             </Button>
           </div>
-          <p>
-            {localizationInput.dontHaveAccount}{" "}
-            <Link to="/register">{localizationInput.register}</Link>
-          </p>
         </Form>
+        <p>
+          {localizationInput.dontHaveAccount}{" "}
+          <Link to="/register">{localizationInput.register}</Link>
+        </p>
       </Container>
     </div>
   );
