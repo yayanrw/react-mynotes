@@ -7,7 +7,10 @@ import ThemeContext from "./contexts/ThemeContext";
 import useTheme from "./hooks/useTheme";
 import AuthContext from "./contexts/AuthContext";
 import Routes from "./routes";
-import { getLocalization } from "./datasources/local_storage_datasource";
+import {
+  getLocalization,
+  setLocalization as setLocalizationLocal,
+} from "./datasources/local_storage_datasource";
 
 const MyNotesApp = () => {
   const [localization, setLocalization] = useState(getLocalization() || ID_KEY);
@@ -17,6 +20,7 @@ const MyNotesApp = () => {
   const toggleLocalization = () => {
     setLocalization((prevLocale) => {
       let newLocale = prevLocale === ID_KEY ? EN_KEY : ID_KEY;
+      setLocalizationLocal(newLocale);
       setLocalization(newLocale);
       return newLocale;
     });
