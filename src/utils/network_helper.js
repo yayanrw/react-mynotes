@@ -1,4 +1,4 @@
-import { ApplicationException, ServerException } from "./exceptions";
+import { ApplicationException, ServerException } from "./exceptions_helper";
 import { getToken } from "../datasources/local_storage_datasource";
 
 const fetchApi = async (url, options) => {
