@@ -4,6 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import useAuth from "../hooks/useAuth";
 import LoadingSpinnerComponent from "../components/LoadingSpinnerComponent";
+import { getToken } from "../datasources/local_storage_datasource";
 
 const RouteMiddleware = ({ child, middleware }) => {
   const { auth } = useContext(AuthContext);
@@ -11,7 +12,9 @@ const RouteMiddleware = ({ child, middleware }) => {
   const { isLoading, handleLoggedUser } = useAuth();
 
   useEffect(() => {
-    handleLoggedUser();
+    if (getToken() != null) {
+      handleLoggedUser();
+    }
   }, []);
 
   if (isLoading) {
